@@ -97,14 +97,14 @@ public class AutonomousGamePad extends CommandOpMode {
 
         InstantCommand yBind = new InstantCommand(()->{
             //selectedSide[0] = "Blue";
-            Side.getInstance().setPositionSide(Side.PositionSide.STAGE_SIDE);
+            Side.getInstance().setPositionSide(Side.PositionSide.BASKETS_SIDE);
             showSelection();
 
         });
 
         InstantCommand aBind = new InstantCommand(()->{
             //selectedSide[0] = "Red";
-            Side.getInstance().setPositionSide(Side.PositionSide.NON_STAGE_SIDE);
+            Side.getInstance().setPositionSide(Side.PositionSide.OBSERVATION_ZONE_SIDE);
             showSelection();
 
         });
@@ -161,14 +161,14 @@ public class AutonomousGamePad extends CommandOpMode {
     private void executePath(){
 
 
-        if (Side.getInstance().getPositionSide() == Side.PositionSide.STAGE_SIDE){
+        if (Side.getInstance().getPositionSide() == Side.PositionSide.BASKETS_SIDE){
             if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE) {
                 selectedStartPos = path1tartPose;
             } else if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED) {
                 selectedStartPos = path1tartPose;
             }
         }
-        else if(Side.getInstance().getPositionSide() == Side.PositionSide.NON_STAGE_SIDE){
+        else if(Side.getInstance().getPositionSide() == Side.PositionSide.OBSERVATION_ZONE_SIDE){
             if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE) {
                 selectedStartPos = path1tartPose;
             } else if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED) {
@@ -187,24 +187,25 @@ public class AutonomousGamePad extends CommandOpMode {
 
         if (Path.getInstance().getSelectedPathToFollow() == Path.PositionToFollow.PATH_1) {
             Path.getInstance().setSelectedPathToFollow(Path.PositionToFollow.PATH_1);
-            if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE && Side.getInstance().getPositionSide() == Side.PositionSide.STAGE_SIDE) {
+            if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE && Side.getInstance().getPositionSide() == Side.PositionSide.BASKETS_SIDE) {
                 TestPath1 bsPath1 = new TestPath1(hardwareMap, selectedStartPos, telemetry);
                 bsPath1.createPath();
                 bsPath1.execute(this);
 
-            } else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.STAGE_SIDE){
+            } else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.BASKETS_SIDE){
 
 
                 /*RedAllianceStageSidePath1 rsPath1 = new RedAllianceStageSidePath1(hardwareMap, createPositionIdentifierMechanism,selectedStartPos, telemetry);
                 rsPath1.createPath();
                 rsPath1.execute(this);*/
             }
-            else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE && Side.getInstance().getPositionSide() == Side.PositionSide.NON_STAGE_SIDE){
+            else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE && Side.getInstance().getPositionSide() == Side.PositionSide.OBSERVATION_ZONE_SIDE)
+            {
                 /*BlueAllianceNonStageSidePath1 bnsPath1 = new BlueAllianceNonStageSidePath1(hardwareMap, createPositionIdentifierMechanism,selectedStartPos, telemetry);
                 bnsPath1.createPath();
                 bnsPath1.execute(this);*/
             }
-            else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.NON_STAGE_SIDE){
+            else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.OBSERVATION_ZONE_SIDE){
                 /*RedAllianceNonStageSidePath1 rnsPath1 = new RedAllianceNonStageSidePath1 (hardwareMap, selectedStartPos, telemetry);
                 rnsPath1.createPath();
                 rnsPath1.execute(this);*/
@@ -213,23 +214,23 @@ public class AutonomousGamePad extends CommandOpMode {
 
         if (Path.getInstance().getSelectedPathToFollow() == Path.PositionToFollow.PATH_2) {
             Path.getInstance().setSelectedPathToFollow(Path.PositionToFollow.PATH_2);
-            if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE && Side.getInstance().getPositionSide() == Side.PositionSide.STAGE_SIDE) {
+            if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE && Side.getInstance().getPositionSide() == Side.PositionSide.BASKETS_SIDE) {
                 //BlueAllianceStageSidePath2 bsPath2 = new BlueAllianceStageSidePath2(hardwareMap, selectedStartPos, telemetry);
                 //bsPath2.createPath();
                 //bsPath2.execute(this);
 
-            } else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.STAGE_SIDE){
+            } else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.BASKETS_SIDE){
 
                 //RedAllianceStageSidePath2 rsPath2 = new RedAllianceStageSidePath2(hardwareMap, createPositionIdentifierMechanism,selectedStartPos, telemetry);
                 //rsPath2.createPath();
                 //rsPath2.execute(this);
             }
-            else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE && Side.getInstance().getPositionSide() == Side.PositionSide.NON_STAGE_SIDE){
+            else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE && Side.getInstance().getPositionSide() == Side.PositionSide.OBSERVATION_ZONE_SIDE){
                 //BlueAllianceNonStageSidePath2 bnsPath2 = new BlueAllianceNonStageSidePath2(hardwareMap, createPositionIdentifierMechanism,selectedStartPos, telemetry);
                 //bnsPath2.createPath();
                 //bnsPath2.execute(this);
             }
-            else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.NON_STAGE_SIDE){
+            else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.OBSERVATION_ZONE_SIDE){
                 //RedAllianceNonStageSidePath2 rnsPath2 = new RedAllianceNonStageSidePath2 (hardwareMap, createPositionIdentifierMechanism,selectedStartPos, telemetry);
                 //rnsPath2.createPath();
                 //rnsPath2.execute(this);

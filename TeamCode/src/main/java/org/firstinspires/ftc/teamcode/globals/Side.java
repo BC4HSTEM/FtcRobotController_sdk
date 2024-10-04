@@ -4,11 +4,11 @@ public enum Side {
     INSTANCE;
 
     public enum PositionSide {
-        STAGE_SIDE,
-        NON_STAGE_SIDE
+        BASKETS_SIDE,
+        OBSERVATION_ZONE_SIDE
     }
 
-    private PositionSide selectedPositionSide = PositionSide.NON_STAGE_SIDE;
+    private PositionSide selectedPositionSide = PositionSide.OBSERVATION_ZONE_SIDE;
 
     public void setPositionSide(PositionSide positionSide){
         selectedPositionSide = positionSide;
