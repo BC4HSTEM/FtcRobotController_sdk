@@ -29,7 +29,7 @@ public class GrabberWristSubsystem extends SubsystemBase {
         }
     }
 
-    public void DropPixel(){
+    public void DropObject(){
         telemetry.addLine("grabber wrist drop initialize");
         grabberWrist.setPosition(dropPosition);
 
@@ -37,7 +37,7 @@ public class GrabberWristSubsystem extends SubsystemBase {
         telemetry.update();
     }
 
-    public void PickUpPixel(){
+    public void PickUpObject(){
         telemetry.addLine("grabber wrist pick up initialize");
         grabberWrist.setPosition(pickUpPosition);
 
