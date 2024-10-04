@@ -8,6 +8,9 @@ public enum Side {
         OBSERVATION_ZONE_SIDE
     }
 
+    private String leftSideFieldName = "BASKETS";
+    private String rightSideFieldName = "OBSERVATION_ZONE";
+
     private PositionSide selectedPositionSide = PositionSide.OBSERVATION_ZONE_SIDE;
 
     public void setPositionSide(PositionSide positionSide){
@@ -20,5 +23,13 @@ public enum Side {
 
     public static Side getInstance(){
         return INSTANCE;
+    }
+
+    public String getLeftSideFieldName(){
+        return leftSideFieldName;
+    }
+
+    public String getRightSideFieldName(){
+        return rightSideFieldName;
     }
 }

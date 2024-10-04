@@ -42,6 +42,8 @@ public class AutonomousGamePad extends CommandOpMode {
 
 
 
+
+
     //private final Vector2d[] finalPosition = new Vector2d[1];
 
     @Override
@@ -245,7 +247,7 @@ public class AutonomousGamePad extends CommandOpMode {
     private void showOptions(boolean update){
 
         telemetry.addLine("Press (X) for BLUE Alliance, (B) for RED Alliance");
-        telemetry.addLine("Press (Y) for STAGE Side, (A) for NON STAGE Side");
+        telemetry.addLine(String.format("Press (Y) for %s, (A) for %s", Side.getInstance().getLeftSideFieldName(), Side.getInstance().getRightSideFieldName()));
         telemetry.addLine("Press (^) for Path 1");
         telemetry.addLine("Press (>) for Path 2");
         telemetry.addLine("Press (v) for Path 3");
@@ -253,7 +255,7 @@ public class AutonomousGamePad extends CommandOpMode {
 
 
         if(update){
-
+            telemetry.update();
         }
     }
 
@@ -267,11 +269,5 @@ public class AutonomousGamePad extends CommandOpMode {
         telemetry.update();
 
     }
-
-    private void showTSEPosition(){
-
-    }
-
-
 
 }
