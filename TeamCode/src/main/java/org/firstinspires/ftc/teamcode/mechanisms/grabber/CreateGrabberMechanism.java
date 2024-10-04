@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.CreateMechanismBase;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberCloseCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberOpenCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.subsystems.GrabberSubsystem;
 
 //18. extend CreateMechanismBase
@@ -20,7 +20,7 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
     private ServoEx gr;
 
     //21. Define your Commands
-    private GrabberCommand grabberCommand;
+    private GrabberOpenCommand grabberOpenCommand;
     private GrabberCloseCommand grabberCloseCommand;
 
     //22. Is this a 180 or 360 servo, define your max and min
@@ -54,7 +54,7 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
         //31. assign the command to te appropriate button action https://docs.ftclib.org/ftclib/v/v2.0.0/command-base/command-system/binding-commands-to-triggers
         //How to Implement a Toggle with a Button Instead:
         op.getGamepadButton(GamepadKeys.Button.A).whenReleased(grabberCloseCommand);
-        op.getGamepadButton(GamepadKeys.Button.A).whenHeld(grabberCommand);
+        op.getGamepadButton(GamepadKeys.Button.A).whenHeld(grabberOpenCommand);
 
         //32. go to CommandTeleop
 
@@ -69,19 +69,19 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
 
         //29. Create the commands, used functions so that autonomous would have less work to do when
         //creating the commands for that opmode
-        grabberCommand = createGrabberCommand();
+        grabberOpenCommand = createGrabberOpenCommand();
         grabberCloseCommand = createGrabberCloseCommand();
 
     }
 
-    public GrabberCommand createGrabberCommand(){
+    public GrabberOpenCommand createGrabberOpenCommand(){
 
-        return new GrabberCommand(grabberSubsystem, telemetry);
+        return new GrabberOpenCommand(grabberSubsystem, telemetry);
     }
 
-    public GrabberCommand getGrabberCommand (){
+    public GrabberOpenCommand getGrabberOpenCommand (){
 
-        return grabberCommand;
+        return grabberOpenCommand;
     }
 
     public GrabberCloseCommand createGrabberCloseCommand(){
