@@ -60,46 +60,46 @@ public class MecanumTeleOp extends LinearOpMode {
              * Custom deadzone created to account for joystick drift
              */
             // Deadzone to correct drift
-            controller1lstickx = gamepad1.left_stick_x;
-            controller1lsticky = gamepad1.left_stick_y;
-            controller1rstickx = gamepad1.right_stick_x;
+        controller1lstickx = gamepad1.left_stick_x;
+        controller1lsticky = gamepad1.left_stick_y;
+        controller1rstickx = gamepad1.right_stick_x;
 
-            if (controller1lstickx < 0.25 && controller1lstickx > -0.25)
-                controller1lstickx = 0.0;
-            if (controller1lsticky < 0.25 && controller1lsticky > -0.25)
-                controller1lsticky = 0.0;
-            if (controller1rstickx < 0.25 && controller1rstickx > -0.25)
-                controller1rstickx = 0.0;
-
-
-
-            //Add slowdown
-            controller1lstickx = controller1lstickx * slowdown;
-            controller1lsticky = controller1lsticky * slowdown;
-            controller1rstickx = controller1rstickx * slowdown;
-
-            double y = controller1lsticky;
-            double x = -controller1lstickx * 1.1; // * 1.1 Counteract imperfect strafing
-            double rx = -controller1rstickx;
-            // Denominator is the largest motor power (absolute value) or 1
-            // This ensures all the powers maintain the same ratio, but only when
-            // at least one is out of the range [-1, 1]
-            double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-            double frontLeftPower = ((y + x + rx) / denominator);
-            double backLeftPower = ((y - x + rx) / denominator);
-            double frontRightPower = ((y - x - rx) / denominator);
-            double backRightPower = ((y + x - rx) / denominator);
+        if (controller1lstickx < 0.25 && controller1lstickx > -0.25)
+            controller1lstickx = 0.0;
+        if (controller1lsticky < 0.25 && controller1lsticky > -0.25)
+            controller1lsticky = 0.0;
+        if (controller1rstickx < 0.25 && controller1rstickx > -0.25)
+            controller1rstickx = 0.0;
 
 
 
-            fl.motor.setPower(frontLeftPower);
-            bl.motor.setPower(backLeftPower);
-            fr.motor.setPower(frontRightPower);
-            br.motor.setPower(backRightPower);
+        //Add slowdown
+        controller1lstickx = controller1lstickx * slowdown;
+        controller1lsticky = controller1lsticky * slowdown;
+        controller1rstickx = controller1rstickx * slowdown;
+
+        double y = controller1lsticky;
+        double x = -controller1lstickx * 1.1; // * 1.1 Counteract imperfect strafing
+        double rx = -controller1rstickx;
+        // Denominator is the largest motor power (absolute value) or 1
+        // This ensures all the powers maintain the same ratio, but only when
+        // at least one is out of the range [-1, 1]
+        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+        double frontLeftPower = ((y + x + rx) / denominator);
+        double backLeftPower = ((y - x + rx) / denominator);
+        double frontRightPower = ((y - x - rx) / denominator);
+        double backRightPower = ((y + x - rx) / denominator);
 
 
-            telemetry.update();
-        }
+
+        fl.motor.setPower(frontLeftPower);
+        bl.motor.setPower(backLeftPower);
+        fr.motor.setPower(frontRightPower);
+        br.motor.setPower(backRightPower);
+
+
+        telemetry.update();
+    }
 }
 
 
