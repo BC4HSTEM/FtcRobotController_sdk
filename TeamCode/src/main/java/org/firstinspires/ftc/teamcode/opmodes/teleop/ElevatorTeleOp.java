@@ -21,10 +21,12 @@ public class ElevatorTeleOp extends LinearOpMode {
 
 
         //import the hardware map
-        Motor el = new Motor(hardwareMap, "EL");
-        Motor bl = new Motor(hardwareMap, "BL");
-        Motor er = new Motor(hardwareMap, "ER");
-        Motor br = new Motor(hardwareMap, "BR");
+        //
+        Motor el = new Motor(hardwareMap, "lLift");    // Port 2, - up, + down
+        Motor er = new Motor(hardwareMap, "rLift");    // Port 0, + up , - down
+
+        // Motor bl = new Motor(hardwareMap, "BL");
+        // Motor br = new Motor(hardwareMap, "BR");
 
 
         FtcDashboard dashboard = FtcDashboard.getInstance();
