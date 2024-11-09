@@ -49,10 +49,10 @@ public class ElevatorSubsystem extends SubsystemBase {
         EL.motorEx.setZeroPowerBehavior(behavior);
     }
 
-    public void setDirection(DcMotorEx.Direction direction){
-        this.direction = direction;
-        ER.motor.setDirection(this.direction);
-        EL.motor.setDirection(this.direction);
+    public void setDirection(DcMotorEx.Direction rDirection, DcMotorEx.Direction lDirection){
+        //this.direction = direction;
+        ER.motor.setDirection(rDirection);
+        EL.motor.setDirection(lDirection);
     }
 
     public void setPower(double power){

@@ -102,7 +102,7 @@ public class CreateElevatorMechanism extends CreateMechanismBase {
         //37.not using encoders at this point but recommend stopping them
         elevatorSubsystem.stopResetEncoder();
         //38. set the direction of the motor, ideally this is tested while not on the lift
-        elevatorSubsystem.setDirection(DcMotorEx.Direction.FORWARD);
+        elevatorSubsystem.setDirection(DcMotorEx.Direction.FORWARD, DcMotorEx.Direction.FORWARD);
 
     }
 
