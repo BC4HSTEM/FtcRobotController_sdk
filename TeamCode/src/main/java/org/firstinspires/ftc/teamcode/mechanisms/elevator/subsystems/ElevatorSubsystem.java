@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.mechanisms.elevator.subsystems;
 
+import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class ElevatorSubsystem {
+public class ElevatorSubsystem extends SubsystemBase {
 
     private MotorEx ER;
     private MotorEx EL;
@@ -33,8 +35,12 @@ public class ElevatorSubsystem {
         EL = ELMotor;
         this.telemetry = telemetry;
     }
+
+    public void turn(double speed){
+        setPower(speed*powerRatio);
+    }
     public void stopResetEncoder(){
-        //setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
     }
 
@@ -43,16 +49,20 @@ public class ElevatorSubsystem {
         EL.motorEx.setZeroPowerBehavior(behavior);
     }
 
-    public void setDirection(DcMotorEx.Direction direction){
-        this.direction = direction;
-        ER.motor.setDirection(this.direction);
-        EL.motor.setDirection(this.direction);
+    public void setDirection(DcMotorEx.Direction rDirection, DcMotorEx.Direction lDirection){
+        //this.direction = direction;
+        ER.motor.setDirection(rDirection);
+        EL.motor.setDirection(lDirection);
     }
 
     public void setPower(double power){
         this.power = power;
         ER.set(this.power);
         EL.set(this.power);
+    }
+
+    public double getPower(){
+        return power;
     }
 
     public void setMode(DcMotorEx.RunMode mode){
@@ -65,7 +75,7 @@ public class ElevatorSubsystem {
         setZeroPowerBehavoir(DcMotorEx.ZeroPowerBehavior.BRAKE);
     }
 
-    public void stopElevator(){
+    public void stop(){
         ER.stopMotor();
         EL.stopMotor();
     }
