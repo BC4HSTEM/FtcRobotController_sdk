@@ -29,7 +29,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     public void drive(double strafe, double forward, double turn){
 
-            drive.driveRobotCentric(-strafe, forward, -turn); //Control of the robot
+            drive.driveRobotCentric(strafe, forward, turn); //Control of the robot
     }
 
     public Motor getFl(){

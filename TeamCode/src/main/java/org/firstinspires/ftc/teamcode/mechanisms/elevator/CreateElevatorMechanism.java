@@ -8,6 +8,7 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import static com.arcrobotics.ftclib.gamepad.GamepadKeys.Trigger.LEFT_TRIGGER;
@@ -29,8 +30,8 @@ public class CreateElevatorMechanism extends CreateMechanismBase {
     private MotorEx ER;
     private MotorEx EL;
 
-    private final String rDeviceName = "rElevatorMotor";
-    private final String lDeviceName = "lElevatorMotor";
+    private final String rDeviceName = "rLift";
+    private final String lDeviceName = "lLift";
 
     private DoubleSupplier liftDownDS;
     private DoubleSupplier liftUpDS;
@@ -89,8 +90,8 @@ public class CreateElevatorMechanism extends CreateMechanismBase {
         //Make sure the device name from the OpMode matches what's in the hardware map
         //the GoBilda part of this may not be needed based on the attached motor
         //FtcLib has special features for GoBuilda motors
-        ER = new MotorEx(hwMap, rDeviceName, Motor.GoBILDA.RPM_312);
-        EL = new MotorEx(hwMap, lDeviceName, Motor.GoBILDA.RPM_312);
+        ER = new MotorEx(hwMap, rDeviceName, Motor.GoBILDA.RPM_30);
+        EL = new MotorEx(hwMap, lDeviceName, Motor.GoBILDA.RPM_30);
         telemetry.addData("Ri", ER);
         telemetry.addData("Li", EL);
         telemetry.update();
@@ -102,7 +103,7 @@ public class CreateElevatorMechanism extends CreateMechanismBase {
         //37.not using encoders at this point but recommend stopping them
         elevatorSubsystem.stopResetEncoder();
         //38. set the direction of the motor, ideally this is tested while not on the lift
-        elevatorSubsystem.setDirection(DcMotorEx.Direction.FORWARD, DcMotorEx.Direction.FORWARD);
+        elevatorSubsystem.setDirection(DcMotorEx.Direction.REVERSE, DcMotorEx.Direction.FORWARD);
 
     }
 
