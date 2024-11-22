@@ -5,22 +5,19 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.subsystems.GrabberSubsystem;
 
-import java.util.function.DoubleSupplier;
-import java.util.function.IntSupplier;
-
 //9. extend CommandBase
-public class GrabberOpenCommand extends CommandBase{
+public class GrabberRightCommand extends CommandBase{
     //10.Define the subsystem(s) that this Command requires
     private GrabberSubsystem grabberSubsystem;
     private Telemetry telemetry;
 
-    public GrabberOpenCommand(GrabberSubsystem grabberSubsystem){
+    public GrabberRightCommand(GrabberSubsystem grabberSubsystem){
         this.grabberSubsystem = grabberSubsystem;
 
         addRequirements(grabberSubsystem);
     }
 
-    public GrabberOpenCommand(GrabberSubsystem grabberSubsystem, Telemetry telemetry){
+    public GrabberRightCommand(GrabberSubsystem grabberSubsystem, Telemetry telemetry){
         //11. Set the subsystem
         this.grabberSubsystem = grabberSubsystem;
         this.telemetry = telemetry;
@@ -34,17 +31,24 @@ public class GrabberOpenCommand extends CommandBase{
     public void initialize(){
         //14. call openGrabber on subsystem
         telemetry.addLine("grabber initialize");
-        telemetry.addData("grabber position", grabberSubsystem.getPosition());
-        telemetry.addData("grabber open position", grabberSubsystem.getOpenPosition());
+        //telemetry.addData("grabber position", grabberSubsystem.getPosition());
+        //telemetry.addData("grabber open position", grabberSubsystem.getOpenPosition());
         telemetry.update();
-        grabberSubsystem.openGrabber();
+        grabberSubsystem.openRightGrabberPosition();
+    }
+
+    @Override
+    public void execute(){
+        telemetry.addData("grabber right position", grabberSubsystem.getGrabberRightPosition());
+        telemetry.addData("grabber right close position", grabberSubsystem.getRightClosePosition());
+        telemetry.update();
     }
 
     //15. isFinished may only be needed to assist with autonomous
-    @Override
+   /* @Override
     public boolean isFinished(){
         return grabberSubsystem.getPosition() <= grabberSubsystem.getOpenPosition();
-    }
+    }*/
 
     //16. Create GrabberCloseCommand using the above structure, the code on initialize will change slightly
     //and so will isFinished
