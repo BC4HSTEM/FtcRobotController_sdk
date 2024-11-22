@@ -74,8 +74,8 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
     @Override
     public void createBase(){
         //27. get the servo from the hardware
-        grabberRight = new SimpleServo(hwMap, "pixel_grabber_right", MIN_ANGLE, MAX_ANGLE);
-        grabberLeft = new SimpleServo(hwMap, "pixel_grabber_left", MIN_ANGLE, MAX_ANGLE);
+        grabberRight = new SimpleServo(hwMap, "grabber_right", MIN_ANGLE, MAX_ANGLE);
+        grabberLeft = new SimpleServo(hwMap, "grabber_left", MIN_ANGLE, MAX_ANGLE);
         grabberLeft.setInverted(true);
         //28. create the subsystem
         grabberSubsystem = new GrabberSubsystem(grabberRight, grabberLeft, telemetry, true);
