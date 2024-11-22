@@ -31,7 +31,7 @@ public class ArmSubsystem extends SubsystemBase {
 
     public double gearRatio = largeGear / smallGear;
 
-    public double ticksPerRotation = 1120;
+    public double ticksPerRotation = 288;
 
     public static int dropTargetPosition = 700;
 
