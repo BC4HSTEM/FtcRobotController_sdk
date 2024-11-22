@@ -12,8 +12,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Config
 public class GrabberSubsystem extends SubsystemBase {
     //2. setup a SeveroEx variable
-    private ServoEx pixelGrabberRight;
-    private ServoEx pixelGrabberLeft;
+    private ServoEx grabberRight;
+    private ServoEx grabberLeft;
 
     private Telemetry telemetry;
     //3. Define the open and close position of the grabber
@@ -22,22 +22,22 @@ public class GrabberSubsystem extends SubsystemBase {
     public static double GRABBER_RIGHT_OPEN_ANGLE = 150;
     public static double GRABBER_LEFT_OPEN_ANGLE = 100;
 
-    public static double GRABBER_RIGHT_CLOSE_POSITION = 0.55;
-    public static double GRABBER_LEFT_CLOSE_POSITION = 0.7;
-    public static double GRABBER_RIGHT_OPEN_POSITION = 0.3;
-    public static double GRABBER_LEFT_OPEN_POSITION = 0.5;
+    public static double GRABBER_RIGHT_CLOSE_POSITION = 0.3;
+    public static double GRABBER_LEFT_CLOSE_POSITION = 0.4;
+    public static double GRABBER_RIGHT_OPEN_POSITION = 0.12;
+    public static double GRABBER_LEFT_OPEN_POSITION = 0.12;
 
     //4. Define you constructor .... we should probably have one with telemetry passed to it
     public GrabberSubsystem(ServoEx grabberRight, ServoEx grabberLeft){
 
-        pixelGrabberRight = grabberRight;
-        pixelGrabberLeft = grabberLeft;
+        this.grabberRight = grabberRight;
+        this.grabberLeft = grabberLeft;
     }
 
     public GrabberSubsystem(ServoEx grabberRight, ServoEx grabberLeft, Telemetry telemetry, boolean useDB){
 
-        pixelGrabberRight = grabberRight;
-        pixelGrabberLeft = grabberLeft;
+        this.grabberRight = grabberRight;
+        this.grabberLeft = grabberLeft;
         if (useDB){
             this.telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         }
@@ -47,18 +47,18 @@ public class GrabberSubsystem extends SubsystemBase {
     }
     //5. define a grab function that sets the servo position....this function should probably be private
     public void grabRight(double rAngle){
-        pixelGrabberRight.turnToAngle(rAngle);
+        grabberRight.turnToAngle(rAngle);
     }
 
     public void grabLeft(double lAngle){
-        pixelGrabberLeft.turnToAngle(lAngle);
+        grabberLeft.turnToAngle(lAngle);
     }
     public void grabRightPosition(double rPosition){
-        pixelGrabberRight.setPosition(rPosition);
+        grabberRight.setPosition(rPosition);
     }
 
     public void grabLeftPosition(double lPosition){
-        pixelGrabberLeft.setPosition(lPosition);
+        grabberLeft.setPosition(lPosition);
     }
 
     //6. Define functions that the commands can call
@@ -90,16 +90,16 @@ public class GrabberSubsystem extends SubsystemBase {
     }
     //7. Accessors for telemetry and isFinished in Commands
     public double getGrabberRightAngle(){
-        return pixelGrabberRight.getAngle();
+        return grabberRight.getAngle();
     }
     public double getGrabberLeftAngle(){
-        return pixelGrabberLeft.getAngle();
+        return grabberLeft.getAngle();
     }
     public double getGrabberRightPosition(){
-        return pixelGrabberRight.getPosition();
+        return grabberRight.getPosition();
     }
     public double getGrabberLeftPosition(){
-        return pixelGrabberLeft.getPosition();
+        return grabberLeft.getPosition();
     }
 
     /*public double getRightCloseAngle){

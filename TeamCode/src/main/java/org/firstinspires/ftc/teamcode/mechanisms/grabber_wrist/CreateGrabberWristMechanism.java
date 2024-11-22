@@ -1,9 +1,5 @@
 package org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist;
 
-import static com.arcrobotics.ftclib.gamepad.GamepadKeys.Trigger.LEFT_TRIGGER;
-import static com.arcrobotics.ftclib.gamepad.GamepadKeys.Trigger.RIGHT_TRIGGER;
-
-import com.arcrobotics.ftclib.command.button.Trigger;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.ServoEx;
@@ -13,19 +9,17 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.CreateMechanismBase;
 
-import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristDropCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristPickUpCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristDownCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.subsystems.GrabberWristSubsystem;
-
-import java.util.function.DoubleSupplier;
 
 public class CreateGrabberWristMechanism extends CreateMechanismBase {
 
     private GrabberWristSubsystem grabberWristSubsystem;
     private ServoEx grabberWrist;
 
-    private GrabberWristDropCommand grabberWristDropCommand;
-    private GrabberWristPickUpCommand grabberWristPickUpCommand;
+    private GrabberWristDownCommand grabberWristDownCommand;
+    private GrabberWristUpCommand grabberWristUpCommand;
 
     private int MIN_ANGLE = 0;
     private int MAX_ANGLE = 180;
@@ -54,8 +48,8 @@ public class CreateGrabberWristMechanism extends CreateMechanismBase {
 
 
 
-        op.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenReleased(grabberWristDropCommand);
-        op.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(grabberWristPickUpCommand);
+        op.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenReleased(grabberWristUpCommand);
+        op.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(grabberWristDownCommand);
 
 
     }
@@ -68,22 +62,22 @@ public class CreateGrabberWristMechanism extends CreateMechanismBase {
 
         //28. create the subsystem
         grabberWristSubsystem = new GrabberWristSubsystem(grabberWrist, telemetry, true);
-        grabberWristSubsystem.setInverted(true);
+        //grabberWristSubsystem.setInverted(true);
 
         //29. Create the commands, used functions so that autonomous would have less work to do when
         //creating the commands for that opmode
-        grabberWristDropCommand = createGrabberWristDropCommand();
-        grabberWristPickUpCommand = createGrabberWristPickUpCommand();
+        grabberWristDownCommand = createGrabberWristDownCommand();
+        grabberWristUpCommand = createGrabberWristUpCommand();
 
     }
 
-    public GrabberWristDropCommand createGrabberWristDropCommand(){
+    public GrabberWristDownCommand createGrabberWristDownCommand(){
 
-        return new GrabberWristDropCommand(grabberWristSubsystem, telemetry);
+        return new GrabberWristDownCommand(grabberWristSubsystem, telemetry);
     }
 
-    public GrabberWristPickUpCommand createGrabberWristPickUpCommand(){
+    public GrabberWristUpCommand createGrabberWristUpCommand(){
 
-        return new GrabberWristPickUpCommand(grabberWristSubsystem, telemetry);
+        return new GrabberWristUpCommand(grabberWristSubsystem, telemetry);
     }
 }

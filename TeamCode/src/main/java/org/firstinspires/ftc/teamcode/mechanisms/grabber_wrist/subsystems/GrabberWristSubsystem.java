@@ -13,8 +13,8 @@ public class GrabberWristSubsystem extends SubsystemBase {
     private ServoEx grabberWrist;
     Telemetry telemetry;
 
-    public static double dropPosition = .5;
-    public static double pickUpPosition = .27;
+    public static double downPosition = .5;
+    public static double upPosition = .2;
 
 
     public GrabberWristSubsystem(ServoEx gw, Telemetry telemetry, boolean useDB){
@@ -29,19 +29,19 @@ public class GrabberWristSubsystem extends SubsystemBase {
         }
     }
 
-    public void DropObject(){
-        telemetry.addLine("grabber wrist drop initialize");
-        grabberWrist.setPosition(dropPosition);
+    public void DownObject(){
+        telemetry.addLine("grabber wrist down initialize");
+        grabberWrist.setPosition(downPosition);
 
-        telemetry.addData("Grabber wrist drop position", grabberWrist.getPosition());
+        telemetry.addData("Grabber wrist down position", grabberWrist.getPosition());
         telemetry.update();
     }
 
-    public void PickUpObject(){
-        telemetry.addLine("grabber wrist pick up initialize");
-        grabberWrist.setPosition(pickUpPosition);
+    public void UpObject(){
+        telemetry.addLine("grabber wrist up initialize");
+        grabberWrist.setPosition(upPosition);
 
-        telemetry.addData("grabber wrist pickup position", grabberWrist.getPosition());
+        telemetry.addData("grabber wrist up position", grabberWrist.getPosition());
         telemetry.update();
     }
 
