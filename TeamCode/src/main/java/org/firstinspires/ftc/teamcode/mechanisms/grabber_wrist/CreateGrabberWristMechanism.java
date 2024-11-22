@@ -22,7 +22,7 @@ public class CreateGrabberWristMechanism extends CreateMechanismBase {
     private GrabberWristUpCommand grabberWristUpCommand;
 
     private int MIN_ANGLE = 0;
-    private int MAX_ANGLE = 180;
+    private int MAX_ANGLE = 270;
 
     public CreateGrabberWristMechanism(HardwareMap hwMap, String deviceName, GamepadEx op, Telemetry telemetry){
         super(hwMap, deviceName, op, telemetry);

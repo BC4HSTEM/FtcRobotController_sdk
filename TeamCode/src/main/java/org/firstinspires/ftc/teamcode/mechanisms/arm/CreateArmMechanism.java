@@ -10,11 +10,14 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.CreateMechanismBase;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDropCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDropPositionCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmMidDropCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpPositionCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.subsystems.ArmSubsystem;
 
 public class CreateArmMechanism extends CreateMechanismBase {
@@ -22,6 +25,11 @@ public class CreateArmMechanism extends CreateMechanismBase {
     private ArmSubsystem armSubsystem;
     private ArmDropCommand armDropCommand;
     private ArmPickUpCommand armPickUpCommand;
+
+    private ArmDownCommand armDownCommand;
+    private ArmUpCommand armUpCommand;
+
+    private ArmTravelCommand armTravelCommand;
 
     private ArmMidDropCommand armMidDropCommand;
 
@@ -52,7 +60,7 @@ public class CreateArmMechanism extends CreateMechanismBase {
         //39. created commands
 
         //40. set motor to run without encoders
-        armSubsystem.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        armSubsystem.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         //armSubsystem.setTargetPosition(20);
 
         //41. instead of creating the command right here, we created a function for it so we
@@ -64,9 +72,13 @@ public class CreateArmMechanism extends CreateMechanismBase {
         armDropPositionCommand = createDropPositionCommand();
         armPickUpPositionCommand = createPickUpPositionCommand();
 
-        op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armDropCommand);
-        op.getGamepadButton(GamepadKeys.Button.X).whenPressed(armPickUpCommand);
-        op.getGamepadButton(GamepadKeys.Button.B).whenPressed(armMidDropCommand);
+        armDownCommand = createArmDownCommand();
+        armUpCommand = createArmUpCommand();
+        armTravelCommand = createArmTravelCommand();
+
+        op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armDownCommand);
+        op.getGamepadButton(GamepadKeys.Button.X).whenPressed(armUpCommand);
+        op.getGamepadButton(GamepadKeys.Button.B).whenPressed(armTravelCommand);
         //armSubsystem.setDefaultCommand(armPickUpCommand);
 
     }
@@ -113,6 +125,20 @@ public class CreateArmMechanism extends CreateMechanismBase {
     private ArmMidDropCommand createMidDropCommand(){
         return new ArmMidDropCommand(armSubsystem, telemetry);
     }
+
+    private ArmDownCommand createArmDownCommand(){
+        return new ArmDownCommand(armSubsystem, telemetry);
+    }
+
+    private ArmUpCommand createArmUpCommand(){
+        return new ArmUpCommand(armSubsystem, telemetry);
+    }
+
+    private ArmTravelCommand createArmTravelCommand(){
+        return new ArmTravelCommand(armSubsystem, telemetry);
+    }
+
+
 
     private ArmPickUpPositionCommand createPickUpPositionCommand(){
         return new ArmPickUpPositionCommand(armSubsystem, telemetry);

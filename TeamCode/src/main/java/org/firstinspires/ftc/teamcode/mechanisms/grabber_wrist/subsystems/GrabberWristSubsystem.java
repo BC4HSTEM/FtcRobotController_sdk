@@ -16,6 +16,9 @@ public class GrabberWristSubsystem extends SubsystemBase {
     public static double downPosition = .5;
     public static double upPosition = .2;
 
+    public static double WRIST_DOWN_ANGLE = 100;
+    public static double WRIST_UP_ANGLE = 150;
+
 
     public GrabberWristSubsystem(ServoEx gw, Telemetry telemetry, boolean useDB){
 
@@ -42,6 +45,22 @@ public class GrabberWristSubsystem extends SubsystemBase {
         grabberWrist.setPosition(upPosition);
 
         telemetry.addData("grabber wrist up position", grabberWrist.getPosition());
+        telemetry.update();
+    }
+
+    public void DownAngleObject(){
+        telemetry.addLine("grabber wrist drop initialize");
+        grabberWrist.turnToAngle(WRIST_DOWN_ANGLE);
+
+        telemetry.addData("Grabber wrist drop position", grabberWrist.getAngle());
+        telemetry.update();
+    }
+
+    public void UpAngleObject(){
+        telemetry.addLine("grabber wrist pick up initialize");
+        grabberWrist.turnToAngle(WRIST_UP_ANGLE);
+
+        telemetry.addData("grabber wrist pickup angle", grabberWrist.getAngle());
         telemetry.update();
     }
 

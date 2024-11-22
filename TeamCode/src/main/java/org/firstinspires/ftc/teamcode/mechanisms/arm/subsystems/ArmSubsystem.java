@@ -25,11 +25,11 @@ public class ArmSubsystem extends SubsystemBase {
     //public static int target = 0;
 
     public static double motorDegrees = 360.0;
-    public static double largeGear = 108;
+    //public static double largeGear = 108;
 
-    public static double smallGear = 30;
+    //public static double smallGear = 30;
 
-    public double gearRatio = largeGear / smallGear;
+    //public double gearRatio = largeGear / smallGear;
 
     public double ticksPerRotation = 288;
 
@@ -38,7 +38,13 @@ public class ArmSubsystem extends SubsystemBase {
     public static int dropMidPosition = 400;
 
     public static int pickUpTargetPosition = 20;
-    private final double ticks_in_degree = (gearRatio * ticksPerRotation)  / motorDegrees;
+
+    public static int downTargetPosition = 50;
+    public static int upTargetPosition = 20;
+
+    public static int travelTargetPosition = 35;
+
+    private final double ticks_in_degree = (/*gearRatio */ ticksPerRotation)  / motorDegrees;
 
     private DcMotorEx arm;
     private Telemetry telemetry;
@@ -74,14 +80,29 @@ public class ArmSubsystem extends SubsystemBase {
         setPower(dropTargetPosition);
     }
 
+    public void setDownTargetPIDPosition(){
+        controller.setPID(p,i,d);
+        setPower(downTargetPosition);
+    }
+
     public void setPickUpTargetPIDPosition(){
         controller.setPID(p,i,d);
         setPower(pickUpTargetPosition);
     }
 
+    public void setUpTargetPIDPosition(){
+        controller.setPID(p,i,d);
+        setPower(upTargetPosition);
+    }
+
     public void setMidDropTargetPIDPosition(){
         controller.setPID(p,i,d);
         setPower(dropMidPosition);
+    }
+
+    public void setTravelTargetPIDPosition(){
+        controller.setPID(p,i,d);
+        setPower(travelTargetPosition);
     }
 
     public void setTargetPosition(int t){
@@ -147,6 +168,18 @@ public class ArmSubsystem extends SubsystemBase {
 
     public boolean isAtPickUpTargetPosition(){
         return arm.getTargetPosition() == pickUpTargetPosition;
+    }
+
+    public boolean isAtDownTargetPosition(){
+        return arm.getTargetPosition() == downTargetPosition;
+    }
+
+    public boolean isAtUpTargetPosition(){
+        return arm.getTargetPosition() == upTargetPosition;
+    }
+
+    public boolean isAtTravelTargetPosition(){
+        return arm.getTargetPosition() == travelTargetPosition;
     }
 
     public double getPosition(){
