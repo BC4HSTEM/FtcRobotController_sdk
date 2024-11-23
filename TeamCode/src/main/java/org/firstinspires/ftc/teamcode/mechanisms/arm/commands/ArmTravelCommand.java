@@ -29,20 +29,20 @@ public class ArmTravelCommand extends CommandBase {
     }
 
 
-
     @Override
     public void execute(){
-        armSubsystem.setTravelTargetPosition();
+        armSubsystem.setTravelTargetPIDPosition();
 
 
     }
 
-    public boolean isFinished(){
-        return armSubsystem.isAtTravelTargetPosition();
-    }
+    /*public boolean isFinished(){
 
-    /*@Override
-    public void end(boolean interrupt){
-        armSubsystem.stopArm();
+        //return armSubsystem.isAtTravelTargetPosition();
     }*/
+
+    @Override
+    public void end(boolean interrupt){
+        //armSubsystem.stopArm();
+    }
 }

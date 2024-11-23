@@ -32,17 +32,18 @@ public class ArmUpCommand extends CommandBase {
 
     @Override
     public void execute(){
-        armSubsystem.setTargetPosition(20);
+        armSubsystem.setUpTargetPIDPosition();
 
 
     }
 
-    public boolean isFinished(){
-        return armSubsystem.isAtUpTargetPosition();
-    }
+    /*public boolean isFinished(){
+
+        //return armSubsystem.isAtUpTargetPosition();
+    }*/
 
     @Override
     public void end(boolean interrupt){
-        armSubsystem.stopArm();
+        //armSubsystem.stopArm();
     }
 }

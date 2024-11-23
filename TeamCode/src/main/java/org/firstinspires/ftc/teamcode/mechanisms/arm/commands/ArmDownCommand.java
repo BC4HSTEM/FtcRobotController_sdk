@@ -33,17 +33,17 @@ public class ArmDownCommand extends CommandBase {
 
     @Override
     public void execute(){
-        armSubsystem.setDownTargetPosition();
+        armSubsystem.setDownTargetPIDPosition();
 
 
     }
 
-    @Override
-    public boolean isFinished(){
+    //@Override
+    /*public boolean isFinished(){
         return armSubsystem.isAtDownTargetPosition();
     }
 
-    /*@Override
+    @Override
     public void end(boolean interrupt){
         armSubsystem.stopArm();
     }*/
