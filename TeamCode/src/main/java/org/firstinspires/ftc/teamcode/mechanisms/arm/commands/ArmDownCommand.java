@@ -33,7 +33,7 @@ public class ArmDownCommand extends CommandBase {
 
     @Override
     public void execute(){
-        armSubsystem.setDownTargetPIDPosition();
+        armSubsystem.setDownTargetPosition();
 
 
     }
@@ -43,10 +43,10 @@ public class ArmDownCommand extends CommandBase {
         return armSubsystem.isAtDownTargetPosition();
     }
 
-    @Override
+    /*@Override
     public void end(boolean interrupt){
         armSubsystem.stopArm();
-    }
+    }*/
 
 
 }

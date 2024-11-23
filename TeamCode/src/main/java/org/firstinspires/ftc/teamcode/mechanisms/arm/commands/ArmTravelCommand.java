@@ -32,7 +32,7 @@ public class ArmTravelCommand extends CommandBase {
 
     @Override
     public void execute(){
-        armSubsystem.setTravelTargetPIDPosition();
+        armSubsystem.setTravelTargetPosition();
 
 
     }
@@ -41,8 +41,8 @@ public class ArmTravelCommand extends CommandBase {
         return armSubsystem.isAtTravelTargetPosition();
     }
 
-    @Override
+    /*@Override
     public void end(boolean interrupt){
         armSubsystem.stopArm();
-    }
+    }*/
 }

@@ -106,22 +106,38 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     public void setTargetPosition(int t){
+        int armPos = arm.getCurrentPosition();
         arm.setTargetPosition(t);
-        arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        arm.setPower(0.5);
+        //arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        arm.setPower(1);
+
+        //telemetry.addData("target power, ", 0.8);
+        telemetry.addData("arm pos, ", armPos);
+        telemetry.addData("target ", t);
+        telemetry.addData("motor power ", arm.getPower());
+
+
+        telemetry.update();
 
     }
 
-    public void setDropTargetPosition(){
-        setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        arm.setTargetPosition(dropTargetPosition);
+    public void setDownTargetPosition(){
+        //setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        setTargetPosition(downTargetPosition);
 
 
     }
 
-    public void setPickUpTargetPosition(){
-        setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        arm.setTargetPosition(pickUpTargetPosition);
+    public void setUpTargetPosition(){
+        //setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        setTargetPosition(upTargetPosition);
+
+
+    }
+
+    public void setTravelTargetPosition(){
+        //setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        setTargetPosition(travelTargetPosition);
 
 
     }
@@ -171,15 +187,16 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     public boolean isAtDownTargetPosition(){
-        return arm.getTargetPosition() == downTargetPosition;
+        return !arm.isBusy();
     }
 
     public boolean isAtUpTargetPosition(){
-        return arm.getTargetPosition() == upTargetPosition;
+
+        return !arm.isBusy();
     }
 
     public boolean isAtTravelTargetPosition(){
-        return arm.getTargetPosition() == travelTargetPosition;
+        return !arm.isBusy();
     }
 
     public double getPosition(){
@@ -208,11 +225,21 @@ public class ArmSubsystem extends SubsystemBase {
         telemetry.addData("pos, ", armPos);
         telemetry.addData("target ", target);
         telemetry.addData("motor power ", arm.getPower());
+        telemetry.addData("ff", ff);
 
         telemetry.update();
 
 
     }
+
+    public void setTargetPower(double power){
+
+
+        arm.setPower(power);
+
+
+    }
+
 
 
 

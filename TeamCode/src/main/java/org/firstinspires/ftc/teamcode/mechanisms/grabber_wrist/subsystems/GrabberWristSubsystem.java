@@ -14,7 +14,7 @@ public class GrabberWristSubsystem extends SubsystemBase {
     Telemetry telemetry;
 
     public static double downPosition = .5;
-    public static double upPosition = .2;
+    public static double upPosition = 0;
 
     public static double WRIST_DOWN_ANGLE = 100;
     public static double WRIST_UP_ANGLE = 150;

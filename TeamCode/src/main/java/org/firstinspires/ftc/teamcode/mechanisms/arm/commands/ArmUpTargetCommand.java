@@ -8,20 +8,20 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.subsystems.ArmSubsystem;
 
 
-public class ArmUpCommand extends CommandBase {
+public class ArmUpTargetCommand extends CommandBase {
 
     private ArmSubsystem armSubsystem;
     private Telemetry telemetry;
 
 
 
-    public ArmUpCommand(ArmSubsystem armSubsystem){
+    public ArmUpTargetCommand(ArmSubsystem armSubsystem){
         this.armSubsystem = armSubsystem;
 
         addRequirements(armSubsystem);
     }
 
-    public ArmUpCommand(ArmSubsystem armSubsystem, Telemetry telemetry){
+    public ArmUpTargetCommand(ArmSubsystem armSubsystem, Telemetry telemetry){
         this.armSubsystem = armSubsystem;
         this.telemetry = telemetry;
         this.telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
@@ -29,10 +29,13 @@ public class ArmUpCommand extends CommandBase {
     }
 
 
-
+    @Override
+    public void initialize(){
+        armSubsystem.setTargetPosition(20);
+    }
     @Override
     public void execute(){
-        armSubsystem.setTargetPosition(20);
+
 
 
     }

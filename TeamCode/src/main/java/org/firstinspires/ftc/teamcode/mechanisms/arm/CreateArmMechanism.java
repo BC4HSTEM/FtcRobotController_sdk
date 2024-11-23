@@ -18,6 +18,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpPositionCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpTargetCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.subsystems.ArmSubsystem;
 
 public class CreateArmMechanism extends CreateMechanismBase {
@@ -28,6 +29,8 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
     private ArmDownCommand armDownCommand;
     private ArmUpCommand armUpCommand;
+
+    private ArmUpTargetCommand armUpTargetCommand;
 
     private ArmTravelCommand armTravelCommand;
 
@@ -60,24 +63,30 @@ public class CreateArmMechanism extends CreateMechanismBase {
         //39. created commands
 
         //40. set motor to run without encoders
-        armSubsystem.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        armSubsystem.setTargetPosition(0);
+        armSubsystem.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+        //armSubsystem.setTargetPower(1);
         //armSubsystem.setTargetPosition(20);
 
         //41. instead of creating the command right here, we created a function for it so we
         //can reuse the code for Auto
-        armDropCommand = createDropCommand();
-        armMidDropCommand = createMidDropCommand();
-        armPickUpCommand = createPickUpCommand();
+        //armDropCommand = createDropCommand();
+        //armMidDropCommand = createMidDropCommand();
+        //armPickUpCommand = createPickUpCommand();
 
-        armDropPositionCommand = createDropPositionCommand();
-        armPickUpPositionCommand = createPickUpPositionCommand();
+        //armDropPositionCommand = createDropPositionCommand();
+        //armPickUpPositionCommand = createPickUpPositionCommand();
 
         armDownCommand = createArmDownCommand();
         armUpCommand = createArmUpCommand();
+        armUpTargetCommand = createArmUpTargetCommand();
         armTravelCommand = createArmTravelCommand();
 
-        op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armDownCommand);
-        op.getGamepadButton(GamepadKeys.Button.X).whenPressed(armUpCommand);
+        //armUpTargetCommand.schedule();
+
+        op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armUpTargetCommand);
+        op.getGamepadButton(GamepadKeys.Button.A).whenPressed(armDownCommand);
         op.getGamepadButton(GamepadKeys.Button.B).whenPressed(armTravelCommand);
         //armSubsystem.setDefaultCommand(armPickUpCommand);
 
@@ -132,6 +141,10 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
     private ArmUpCommand createArmUpCommand(){
         return new ArmUpCommand(armSubsystem, telemetry);
+    }
+
+    private ArmUpTargetCommand createArmUpTargetCommand(){
+        return new ArmUpTargetCommand(armSubsystem, telemetry);
     }
 
     private ArmTravelCommand createArmTravelCommand(){
