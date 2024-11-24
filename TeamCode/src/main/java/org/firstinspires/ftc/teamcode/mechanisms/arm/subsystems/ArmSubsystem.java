@@ -7,6 +7,7 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
@@ -17,12 +18,12 @@ public class ArmSubsystem extends SubsystemBase {
 
     private PIDController controller;
 
-    public static double p = 0.001;
+    public static double p = 0.06;
     public static double i = 0.0;
     public static double d = 0.0001;
-    public static double f = 2;
+    public static double f = .09;
 
-    //public static int target = 0;
+    public static int testTarget = 0;
 
     public static double motorDegrees = 360.0;
     //public static double largeGear = 108;
@@ -39,10 +40,10 @@ public class ArmSubsystem extends SubsystemBase {
 
     public static int pickUpTargetPosition = 20;
 
-    public static int downTargetPosition = 50;
-    public static int upTargetPosition = 20;
+    public static int downTargetPosition = 110;
+    public static int upTargetPosition = 25;
 
-    public static int travelTargetPosition = 35;
+    public static int travelTargetPosition = 50;
 
     private final double ticks_in_degree = (/*gearRatio */ ticksPerRotation)  / motorDegrees;
 
@@ -179,24 +180,24 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     public boolean isAtDropTargetPosition(){
-        return arm.getTargetPosition() == dropTargetPosition;
+        return getPosition() == dropTargetPosition;
     }
 
     public boolean isAtPickUpTargetPosition(){
-        return arm.getTargetPosition() == pickUpTargetPosition;
+        return getPosition() == pickUpTargetPosition;
     }
 
     public boolean isAtDownTargetPosition(){
-        return !arm.isBusy();
+        return getPosition() == downTargetPosition;
     }
 
     public boolean isAtUpTargetPosition(){
 
-        return !arm.isBusy();
+        return getPosition() == upTargetPosition;
     }
 
     public boolean isAtTravelTargetPosition(){
-        return !arm.isBusy();
+        return getPosition() == travelTargetPosition;
     }
 
     public double getPosition(){

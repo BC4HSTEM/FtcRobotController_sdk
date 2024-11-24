@@ -63,29 +63,26 @@ public class CreateArmMechanism extends CreateMechanismBase {
         //39. created commands
 
         //40. set motor to run without encoders
-        armSubsystem.setTargetPosition(0);
-        armSubsystem.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
 
-        //armSubsystem.setTargetPower(1);
-        //armSubsystem.setTargetPosition(20);
+        armSubsystem.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+
 
         //41. instead of creating the command right here, we created a function for it so we
         //can reuse the code for Auto
-        //armDropCommand = createDropCommand();
-        //armMidDropCommand = createMidDropCommand();
-        //armPickUpCommand = createPickUpCommand();
+        armDropCommand = createDropCommand();
+        armMidDropCommand = createMidDropCommand();
+        armPickUpCommand = createPickUpCommand();
 
-        //armDropPositionCommand = createDropPositionCommand();
-        //armPickUpPositionCommand = createPickUpPositionCommand();
+        armDropPositionCommand = createDropPositionCommand();
+        armPickUpPositionCommand = createPickUpPositionCommand();
 
         armDownCommand = createArmDownCommand();
         armUpCommand = createArmUpCommand();
         armUpTargetCommand = createArmUpTargetCommand();
         armTravelCommand = createArmTravelCommand();
 
-        //armUpTargetCommand.schedule();
 
-        op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armUpTargetCommand);
+        op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armUpCommand);
         op.getGamepadButton(GamepadKeys.Button.A).whenPressed(armDownCommand);
         op.getGamepadButton(GamepadKeys.Button.B).whenPressed(armTravelCommand);
         //armSubsystem.setDefaultCommand(armPickUpCommand);

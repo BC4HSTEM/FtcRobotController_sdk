@@ -48,8 +48,8 @@ public class CreateGrabberWristMechanism extends CreateMechanismBase {
 
 
 
-        op.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenReleased(grabberWristUpCommand);
-        op.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(grabberWristDownCommand);
+        op.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenReleased(grabberWristDownCommand);
+        op.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(grabberWristUpCommand);
 
 
     }
