@@ -45,9 +45,9 @@ public class ArmTeleop extends OpMode {
 
         int armPos = arm_motor.getCurrentPosition();
         double pid = pidController.calculate(armPos, target);
-        double ff = Math.cos(Math.toRadians(target / ticks_in_degree));
+        double ff = Math.cos(Math.toRadians(target / ticks_in_degree)) * f;
 
-        double power = pid * ff;
+        double power = pid + ff;
 
         arm_motor.setPower(power);
 
