@@ -40,10 +40,10 @@ public class ArmSubsystem extends SubsystemBase {
 
     public static int pickUpTargetPosition = 20;
 
-    public static int downTargetPosition = 110;
+    public static int downTargetPosition = 113;
     public static int upTargetPosition = 25;
 
-    public static int travelTargetPosition = 50;
+    public static int travelTargetPosition = 65;
 
     private final double ticks_in_degree = (/*gearRatio */ ticksPerRotation)  / motorDegrees;
 
