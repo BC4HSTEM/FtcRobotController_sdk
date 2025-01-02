@@ -66,6 +66,7 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
         armSubsystem.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
+        armSubsystem.setDirection(DcMotorEx.Direction.REVERSE);
 
         //41. instead of creating the command right here, we created a function for it so we
         //can reuse the code for Auto
