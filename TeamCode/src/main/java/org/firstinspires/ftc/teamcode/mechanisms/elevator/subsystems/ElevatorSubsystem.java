@@ -17,7 +17,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     private DcMotorEx.Direction direction;
     private double power = 0.0;
     //6. Added in the ability to throttle power
-    private double powerRatio = 1.0;
+
     //7. Created a runmode variable (https://docs.ftclib.org/ftclib/v/v2.0.0/features/hardware/motors#using-a-runmode)
     private DcMotorEx.RunMode mode;
 
@@ -37,7 +37,9 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
     public void turn(double speed){
-        setPower(speed*powerRatio);
+        if (getCurrentPositionER() > 0){
+            setPower(speed);
+        }
     }
     public void stopResetEncoder(){
         setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -99,5 +101,14 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     public DcMotorSimple.Direction getDirection(){
         return ER.motorEx.getDirection();
+    }
+
+    public double getCurrentPositionER() {
+        return ER.getCurrentPosition();
+
+    }
+    public double getCurrentPositionEL() {
+        return EL.getCurrentPosition();
+
     }
 }

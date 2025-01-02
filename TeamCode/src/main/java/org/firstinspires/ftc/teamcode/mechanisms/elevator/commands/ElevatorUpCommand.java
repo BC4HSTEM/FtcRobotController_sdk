@@ -33,7 +33,7 @@ public class ElevatorUpCommand extends CommandBase {
 
         telemetry.addLine("LiftUp Executing");
         telemetry.update();
-        elevatorSubsystem.turn(power.getAsDouble() * 0.75);
+        elevatorSubsystem.turn(power.getAsDouble());
         telemetry.addData("Motor Power", elevatorSubsystem.getPower());
         //telemetry.addData("Motor Min Level in Set Lift Left Cmd", elevatorSubsystem.getMinTargetPosition());
         //telemetry.addData("Motor Current Level in Set Lift Left Cmd", elevatorSubsystem.getCurrentPosition());
