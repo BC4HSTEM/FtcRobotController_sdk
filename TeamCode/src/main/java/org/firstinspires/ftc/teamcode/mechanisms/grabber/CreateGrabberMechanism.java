@@ -64,7 +64,7 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
         op.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).toggleWhenPressed(grabberRightCloseCommand,grabberRightCommand);
         //op.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(grabberRightCloseCommand);
 
-        op.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).toggleWhenPressed(grabberLeftCloseCommand,grabberLeftCommand);
+        op.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).toggleWhenPressed(grabberLeftCloseCommand,grabberLeftCommand);
         //op.getGamepadButton(GamepadKeys.Button.A).whenPressed(grabberLeftCloseCommand);
 
         //32. go to CommandTeleop

@@ -81,6 +81,11 @@ public class GrabberSubsystem extends SubsystemBase {
     public void closeRightGrabberPosition(){
         grabRightPosition(GRABBER_RIGHT_CLOSE_POSITION);
     }
+    public void closeGrabberPosition(){
+        grabRightPosition(GRABBER_RIGHT_CLOSE_POSITION);
+        grabLeftPosition(GRABBER_LEFT_CLOSE_POSITION);
+    }
+
 
     public void openLeftGrabberPosition(){
         grabLeftPosition(GRABBER_LEFT_OPEN_POSITION);
@@ -88,6 +93,11 @@ public class GrabberSubsystem extends SubsystemBase {
     public void closeLeftGrabberPosition(){
         grabLeftPosition(GRABBER_LEFT_CLOSE_POSITION);
     }
+    public void openGrabberPosition(){
+        grabLeftPosition(GRABBER_LEFT_OPEN_POSITION);
+        grabRightPosition(GRABBER_RIGHT_OPEN_POSITION);
+    }
+
     //7. Accessors for telemetry and isFinished in Commands
     public double getGrabberRightAngle(){
         return grabberRight.getAngle();
@@ -101,6 +111,7 @@ public class GrabberSubsystem extends SubsystemBase {
     public double getGrabberLeftPosition(){
         return grabberLeft.getPosition();
     }
+
 
     /*public double getRightCloseAngle){
         return GRABBER_RIGHT_CLOSE_ANGLE;
