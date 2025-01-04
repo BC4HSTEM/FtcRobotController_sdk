@@ -33,10 +33,11 @@ public class ElevatorDownCommand extends CommandBase {
 
         telemetry.addLine("LiftDown Executing");
         telemetry.update();
-        elevatorSubsystem.turn(-power.getAsDouble()*0.5);
+        elevatorSubsystem.turn(-power.getAsDouble());
         telemetry.addData("Motor Power", elevatorSubsystem.getPower());
         //telemetry.addData("Motor Min Level in Set Lift Left Cmd", elevatorSubsystem.getMinTargetPosition());
-        //telemetry.addData("Motor Current Level in Set Lift Left Cmd", elevatorSubsystem.getCurrentPosition());
+        telemetry.addData("Motor Current Level in Set Lift Left Cmd", elevatorSubsystem.getCurrentPositionER());
+        telemetry.addData("Motor Current Level in Set Lift Left Cmd", elevatorSubsystem.getCurrentPositionEL());
 
         telemetry.update();
     }

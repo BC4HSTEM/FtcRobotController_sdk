@@ -40,10 +40,10 @@ public class ArmSubsystem extends SubsystemBase {
 
     public static int pickUpTargetPosition = 20;
 
-    public static int downTargetPosition = 110;
+    public static int downTargetPosition = 113;
     public static int upTargetPosition = 25;
 
-    public static int travelTargetPosition = 50;
+    public static int travelTargetPosition = 65;
 
     private final double ticks_in_degree = (/*gearRatio */ ticksPerRotation)  / motorDegrees;
 
@@ -110,7 +110,7 @@ public class ArmSubsystem extends SubsystemBase {
         int armPos = arm.getCurrentPosition();
         arm.setTargetPosition(t);
         //arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        arm.setPower(1);
+        arm.setPower(0.8);
 
         //telemetry.addData("target power, ", 0.8);
         telemetry.addData("arm pos, ", armPos);
