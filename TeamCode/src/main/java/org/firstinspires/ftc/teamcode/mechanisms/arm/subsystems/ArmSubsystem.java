@@ -110,7 +110,7 @@ public class ArmSubsystem extends SubsystemBase {
         int armPos = arm.getCurrentPosition();
         arm.setTargetPosition(t);
         //arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        arm.setPower(1);
+        arm.setPower(0.8);
 
         //telemetry.addData("target power, ", 0.8);
         telemetry.addData("arm pos, ", armPos);

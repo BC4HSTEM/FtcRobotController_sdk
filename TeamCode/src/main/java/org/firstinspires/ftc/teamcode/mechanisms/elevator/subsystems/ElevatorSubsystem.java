@@ -37,9 +37,9 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
     public void turn(double speed){
-        if (getCurrentPositionER() > 0){
+        //if (getCurrentPositionER() >= 0){
             setPower(speed);
-        }
+       // }
     }
     public void stopResetEncoder(){
         setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

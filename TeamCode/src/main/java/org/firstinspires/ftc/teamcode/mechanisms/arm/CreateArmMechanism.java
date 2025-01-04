@@ -6,6 +6,7 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -66,7 +67,7 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
         armSubsystem.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-        armSubsystem.setDirection(DcMotorEx.Direction.REVERSE);
+
 
         //41. instead of creating the command right here, we created a function for it so we
         //can reuse the code for Auto
@@ -110,7 +111,7 @@ public class CreateArmMechanism extends CreateMechanismBase {
         //37.not using encoders at this point but recommend stopping them
         armSubsystem.stopResetEncoder();
         //38. set the direction of the motor, ideally this is tested while not on the lift
-        armSubsystem.setDirection(DcMotorEx.Direction.FORWARD);
+        armSubsystem.setDirection(DcMotorEx.Direction.REVERSE);
 
         //op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armPickUpCommand);
 
