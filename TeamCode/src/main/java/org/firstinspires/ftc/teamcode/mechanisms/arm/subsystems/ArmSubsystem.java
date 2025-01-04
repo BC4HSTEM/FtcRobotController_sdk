@@ -180,24 +180,24 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     public boolean isAtDropTargetPosition(){
-        return getPosition() == dropTargetPosition;
+        return controller.atSetPoint();
     }
 
     public boolean isAtPickUpTargetPosition(){
-        return getPosition() == pickUpTargetPosition;
+        return controller.atSetPoint();
     }
 
     public boolean isAtDownTargetPosition(){
-        return getPosition() == downTargetPosition;
+        return controller.atSetPoint();
     }
 
     public boolean isAtUpTargetPosition(){
 
-        return getPosition() == upTargetPosition;
+        return controller.atSetPoint();
     }
 
     public boolean isAtTravelTargetPosition(){
-        return getPosition() == travelTargetPosition;
+        return controller.atSetPoint();
     }
 
     public double getPosition(){

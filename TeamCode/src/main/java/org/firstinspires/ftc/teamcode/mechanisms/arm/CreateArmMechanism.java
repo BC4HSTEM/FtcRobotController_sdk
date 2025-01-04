@@ -111,6 +111,7 @@ public class CreateArmMechanism extends CreateMechanismBase {
         //38. set the direction of the motor, ideally this is tested while not on the lift
         armSubsystem.setDirection(DcMotorEx.Direction.FORWARD);
 
+
         //op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armPickUpCommand);
 
 

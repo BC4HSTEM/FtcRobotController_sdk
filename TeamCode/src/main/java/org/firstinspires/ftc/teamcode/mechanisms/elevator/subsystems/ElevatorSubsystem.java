@@ -37,6 +37,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
     public void turn(double speed){
+
         setPower(speed*powerRatio);
     }
     public void stopResetEncoder(){
