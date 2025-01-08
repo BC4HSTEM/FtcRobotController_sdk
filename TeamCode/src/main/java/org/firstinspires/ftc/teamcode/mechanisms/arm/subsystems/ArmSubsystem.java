@@ -18,6 +18,9 @@ public class ArmSubsystem extends SubsystemBase {
 
     private PIDController controller;
 
+
+    // OPTION 1: decrease the P value in PID
+    // to slow the rate at which the control loop reaches its target
     public static double p = 0.06;
     public static double i = 0.0;
     public static double d = 0.0001;
@@ -34,6 +37,11 @@ public class ArmSubsystem extends SubsystemBase {
 
     public double ticksPerRotation = 288;
 
+    // NOTE: Sets offset for the starting position of the arm. Value used with the alternate code in Option 2 below
+    // I think this is 144 however it would be good to check telemetry and the outputs.
+    // I'm not quite sure I understand how negative/positive power from cosine affects the PID calculation
+    public double ticksOffsetFromHorizontal = 144;
+
     public static int dropTargetPosition = 700;
 
     public static int dropMidPosition = 400;
@@ -45,7 +53,11 @@ public class ArmSubsystem extends SubsystemBase {
 
     public static int travelTargetPosition = 65;
 
-    private final double ticks_in_degree = (/*gearRatio */ ticksPerRotation)  / motorDegrees;
+    // NOTE: ticks in degree should divide the ticks per 1 motor rotation into 360. (Removing gear ratio for now)
+    // 288 / 360 = 1.25 ticks for every degree
+    // Core Hex Motor Specs
+    // https://www.revrobotics.com/rev-41-1300/
+    private final double ticks_in_degree = motorDegrees / ticksPerRotation;
 
     private DcMotorEx arm;
     private Telemetry telemetry;
@@ -212,6 +224,15 @@ public class ArmSubsystem extends SubsystemBase {
     private void setPower(int target){
         int armPos = arm.getCurrentPosition();
         double pid = controller.calculate(armPos, target);
+
+        // OPTION 2: Determine trig and math corrections for the arm movement
+        // https://www.geogebra.org/m/XC3D226P to visualize how cosine is used to produce power to the arm
+        // Use armPos when setting ff so the power feedforward is proportional to the CURRENT arm angle by using COSINE
+        // Offset the arm angle from horizontal to the starting position
+        //  ** (note: in ticks, not angle!); determine correct value and needs tuned?
+        // Looks like ticks should be multiplied (not divided) by the ticks_in_degree to get the correct angle to convert to radians
+
+        // double ff = Math.cos( Math.toRadians( (armPos + ticksOffsetFromHorizontal) * ticks_in_degree)) * f;
         double ff = Math.cos(Math.toRadians(target / ticks_in_degree)) * f;
 
         double power = pid + ff;
@@ -219,12 +240,11 @@ public class ArmSubsystem extends SubsystemBase {
 
         arm.setPower(power);
 
-
-
-
-        telemetry.addData("power, ", power);
-        telemetry.addData("pos, ", armPos);
-        telemetry.addData("target ", target);
+        telemetry.addLine("ARM CONTROL");
+        telemetry.addData("power", power);
+        telemetry.addData("armPos ", armPos);
+        telemetry.addData("target (position) ", target);
+        telemetry.addData("target angle ", target / ticks_in_degree);
         telemetry.addData("motor power ", arm.getPower());
         telemetry.addData("ff", ff);
 
