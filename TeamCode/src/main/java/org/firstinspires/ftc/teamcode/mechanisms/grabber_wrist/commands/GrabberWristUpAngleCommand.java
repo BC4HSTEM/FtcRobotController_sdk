@@ -5,11 +5,11 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.subsystems.GrabberWristSubsystem;
 
-public class GrabberWristDownCommand extends CommandBase {
+public class GrabberWristUpAngleCommand extends CommandBase {
 
     GrabberWristSubsystem grabberWristSubsystem;
     Telemetry telemetry;
-    public GrabberWristDownCommand(GrabberWristSubsystem gwSubsystem, Telemetry telemetry){
+    public GrabberWristUpAngleCommand(GrabberWristSubsystem gwSubsystem, Telemetry telemetry){
         grabberWristSubsystem = gwSubsystem;
         this.telemetry = telemetry;
 
@@ -19,13 +19,12 @@ public class GrabberWristDownCommand extends CommandBase {
     @Override
     public void initialize(){
 
-        grabberWristSubsystem.DownObject();
+        grabberWristSubsystem.UpAngleObject();
 
     }
 
     @Override
     public boolean isFinished(){
-
         return true;
     }
 }

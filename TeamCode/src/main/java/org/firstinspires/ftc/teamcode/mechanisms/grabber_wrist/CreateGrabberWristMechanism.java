@@ -7,19 +7,25 @@ import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.mechanisms.CreateMechanismBase;
 
+import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristDownAngleCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristDownCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristUpAngleCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.subsystems.GrabberWristSubsystem;
 
 public class CreateGrabberWristMechanism extends CreateMechanismBase {
 
     private GrabberWristSubsystem grabberWristSubsystem;
-    private ServoEx grabberWrist;
+    private SimpleServo grabberWrist;
 
     private GrabberWristDownCommand grabberWristDownCommand;
     private GrabberWristUpCommand grabberWristUpCommand;
+
+    private GrabberWristDownAngleCommand grabberWristDownAngleCommand;
+    private GrabberWristUpAngleCommand grabberWristUpAngleCommand;
 
     private int MIN_ANGLE = 0;
     private int MAX_ANGLE = 270;
@@ -48,8 +54,10 @@ public class CreateGrabberWristMechanism extends CreateMechanismBase {
 
 
 
-        op.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenReleased(grabberWristDownCommand);
+        op.getGamepadButton(GamepadKeys.Button.DPAD_UP).whileHeld(grabberWristDownCommand);
         op.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenHeld(grabberWristUpCommand);
+
+
 
 
     }
@@ -57,7 +65,10 @@ public class CreateGrabberWristMechanism extends CreateMechanismBase {
     @Override
     public void createBase(){
         //27. get the servo from the hardware
-        grabberWrist = new SimpleServo(hwMap, deviceName, MIN_ANGLE, MAX_ANGLE);
+        grabberWrist = new SimpleServo(hwMap, deviceName, MIN_ANGLE, MAX_ANGLE, AngleUnit.DEGREES);
+
+
+
 
 
         //28. create the subsystem
@@ -69,6 +80,9 @@ public class CreateGrabberWristMechanism extends CreateMechanismBase {
         grabberWristDownCommand = createGrabberWristDownCommand();
         grabberWristUpCommand = createGrabberWristUpCommand();
 
+        grabberWristDownAngleCommand = createGrabberWristDownAngleCommand();
+        grabberWristUpAngleCommand = createGrabberWristUpAngleCommand();
+
     }
 
     public GrabberWristDownCommand createGrabberWristDownCommand(){
@@ -79,5 +93,15 @@ public class CreateGrabberWristMechanism extends CreateMechanismBase {
     public GrabberWristUpCommand createGrabberWristUpCommand(){
 
         return new GrabberWristUpCommand(grabberWristSubsystem, telemetry);
+    }
+
+    public GrabberWristDownAngleCommand createGrabberWristDownAngleCommand(){
+
+        return new GrabberWristDownAngleCommand(grabberWristSubsystem, telemetry);
+    }
+
+    public GrabberWristUpAngleCommand createGrabberWristUpAngleCommand(){
+
+        return new GrabberWristUpAngleCommand(grabberWristSubsystem, telemetry);
     }
 }

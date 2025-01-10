@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -12,8 +13,19 @@ import org.firstinspires.ftc.teamcode.mechanisms.grabber.CreateGrabberMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.CreateGrabberWristMechanism;
 
 
+
+@Config
 @TeleOp(name="Command Combined TeleOp")
 public class CommandTeleOp extends CommandOpMode {
+
+    public static double p = 0.0;
+    public static double i = 0.0;
+
+    public static double d = 0.0;
+
+    public static double f = 0.0;
+
+    public static double target = 50;
 
     @Override
     public void initialize() {
@@ -28,6 +40,7 @@ public class CommandTeleOp extends CommandOpMode {
         CreateGrabberMechanism createGrabber = new CreateGrabberMechanism(hardwareMap, "grab", driver1, telemetry, true);
 
         CreateArmMechanism createArmMechanism = new CreateArmMechanism(hardwareMap, "arm", driver1, telemetry, true);
+
         CreateGrabberMechanism createGrabberMechanism = new CreateGrabberMechanism(hardwareMap, "grabber", driver1, telemetry, true);
         CreateGrabberWristMechanism createGrabberWristMechanism = new CreateGrabberWristMechanism(hardwareMap, "wrist_Motion", driver1, telemetry, true);
 

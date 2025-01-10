@@ -36,12 +36,15 @@ public abstract class CreateMechanismBase implements Mechanism{
 
     }
 
+
     private void CreateMechanismBaseBase(final HardwareMap hwMap, final String deviceName, Telemetry telemetry){
         this.deviceName = deviceName;
         this.hwMap = hwMap;
 
         this.telemetry = telemetry;
     }
+
+
 
     public String getName() {
         return this.getClass().getSimpleName();

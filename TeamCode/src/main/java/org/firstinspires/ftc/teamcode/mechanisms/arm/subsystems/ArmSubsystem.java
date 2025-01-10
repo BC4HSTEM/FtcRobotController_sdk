@@ -21,12 +21,12 @@ public class ArmSubsystem extends SubsystemBase {
 
     // OPTION 1: decrease the P value in PID
     // to slow the rate at which the control loop reaches its target
-    public static double p = 0.06;
+    public static double p = 0.30; //.30 //0.44 //0.0099;
     public static double i = 0.0;
-    public static double d = 0.0001;
-    public static double f = .09;
+    public static double d = 0.0001; //0.0028556 //0.0002 // 0.0001;
+    public static double f = 0.09; //0.09 //.09;
 
-    public static int testTarget = 0;
+    public static int testTarget = 50;
 
     public static double motorDegrees = 360.0;
     //public static double largeGear = 108;
@@ -48,7 +48,8 @@ public class ArmSubsystem extends SubsystemBase {
 
     public static int pickUpTargetPosition = 20;
 
-    public static int downTargetPosition = 113;
+    public static int downTargetPosition = 110
+            ;
     public static int upTargetPosition = 25;
 
     public static int travelTargetPosition = 65;
@@ -232,7 +233,7 @@ public class ArmSubsystem extends SubsystemBase {
         //  ** (note: in ticks, not angle!); determine correct value and needs tuned?
         // Looks like ticks should be multiplied (not divided) by the ticks_in_degree to get the correct angle to convert to radians
 
-        // double ff = Math.cos( Math.toRadians( (armPos + ticksOffsetFromHorizontal) * ticks_in_degree)) * f;
+        //double ff = Math.cos( Math.toRadians( (armPos + ticksOffsetFromHorizontal) * ticks_in_degree)) * f;
         double ff = Math.cos(Math.toRadians(target / ticks_in_degree)) * f;
 
         double power = pid + ff;
@@ -244,6 +245,7 @@ public class ArmSubsystem extends SubsystemBase {
         telemetry.addData("power", power);
         telemetry.addData("armPos ", armPos);
         telemetry.addData("target (position) ", target);
+        telemetry.addData("test target (position) ", testTarget);
         telemetry.addData("target angle ", target / ticks_in_degree);
         telemetry.addData("motor power ", arm.getPower());
         telemetry.addData("ff", ff);
