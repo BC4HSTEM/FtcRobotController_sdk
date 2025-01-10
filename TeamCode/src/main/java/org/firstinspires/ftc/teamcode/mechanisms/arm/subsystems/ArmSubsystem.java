@@ -170,6 +170,22 @@ public class ArmSubsystem extends SubsystemBase {
         arm.setMode(mode);
     }
 
+    public void setF(double f){
+        ArmSubsystem.f = f;
+    }
+
+    public void setP(double p){
+        ArmSubsystem.p = p;
+    }
+
+    public void setI(double i){
+        ArmSubsystem.i = i;
+    }
+
+    public void setD(double d){
+        ArmSubsystem.d = d;
+    }
+
     public void stopArm(){
         arm.setPower(0);
     }
@@ -178,6 +194,7 @@ public class ArmSubsystem extends SubsystemBase {
 
         return arm.getPower();
     }
+
 
     public boolean isAtDropTargetPosition(){
         return controller.atSetPoint();
