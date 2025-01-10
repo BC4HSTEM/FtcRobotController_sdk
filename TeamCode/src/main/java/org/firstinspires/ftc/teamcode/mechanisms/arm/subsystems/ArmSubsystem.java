@@ -23,6 +23,11 @@ public class ArmSubsystem extends SubsystemBase {
     public static double d = 0.0001;
     public static double f = .09;
 
+    public static double pIncrement = 0.00000001;
+    public static double iIncrement = 0.00000001;
+    public static double dIncrement = 0.00000001;
+    public static double fIncrement = 0.00000001;
+
     public static int testTarget = 0;
 
     public static double motorDegrees = 360.0;
@@ -228,8 +233,8 @@ public class ArmSubsystem extends SubsystemBase {
 
     private void setPower(int target){
         int armPos = arm.getCurrentPosition();
-        double pid = controller.calculate(armPos, target);
-        double ff = Math.cos(Math.toRadians(target / ticks_in_degree)) * f;
+        double pid = controller.calculate(armPos, testTarget);
+        double ff = Math.cos(Math.toRadians(testTarget / ticks_in_degree)) * f;
 
         double power = pid + ff;
         
