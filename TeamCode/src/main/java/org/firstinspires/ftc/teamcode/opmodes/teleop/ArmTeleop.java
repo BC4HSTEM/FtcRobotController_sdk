@@ -7,13 +7,14 @@ import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Config
 @TeleOp
 public class ArmTeleop extends OpMode {
 
     private PIDController pidController;
-    public static double p = .06, i = 0, d = 0.0001;
+    public static double p = 0.0, i = 0, d = 0.000;
     public static double f = 0.08;
 
 
@@ -34,6 +35,8 @@ public class ArmTeleop extends OpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         arm_motor = hardwareMap.get(DcMotorEx.class, "arm");
+        arm_motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        
 
 
 

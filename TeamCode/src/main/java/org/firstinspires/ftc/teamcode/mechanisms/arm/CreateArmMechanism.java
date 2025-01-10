@@ -101,6 +101,7 @@ public class CreateArmMechanism extends CreateMechanismBase {
         telemetry.addLine("Arm createBase");
 
         arm = hwMap.get(DcMotorEx.class,deviceName );
+
         telemetry.addData("Arm", arm);
         telemetry.update();
 
