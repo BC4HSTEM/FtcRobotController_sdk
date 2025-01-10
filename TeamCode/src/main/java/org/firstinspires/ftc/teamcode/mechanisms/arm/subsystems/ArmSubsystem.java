@@ -215,6 +215,7 @@ public class ArmSubsystem extends SubsystemBase {
         double ff = Math.cos(Math.toRadians(target / ticks_in_degree)) * f;
 
         double power = pid + ff;
+        
 
 
         arm.setPower(power);
