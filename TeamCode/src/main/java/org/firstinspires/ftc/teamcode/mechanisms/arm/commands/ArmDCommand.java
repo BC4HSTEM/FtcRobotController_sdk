@@ -14,9 +14,9 @@ public class ArmDCommand extends CommandBase {
 
     Telemetry t;
 
-    public ArmDCommand(ArmSubsystem armSubsystem, DoubleSupplier pY, Telemetry t){
+    public ArmDCommand(ArmSubsystem armSubsystem, DoubleSupplier dY, Telemetry t){
         this.armSubsystem = armSubsystem;
-        dYValue = pY;
+        dYValue = dY;
 
 
         this.t = t;
