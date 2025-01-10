@@ -177,18 +177,22 @@ public class ArmSubsystem extends SubsystemBase {
 
     public void setF(double f){
         ArmSubsystem.f = f;
+        setPower(0);
     }
 
     public void setP(double p){
         ArmSubsystem.p = p;
+        setPower(0);
     }
 
     public void setI(double i){
         ArmSubsystem.i = i;
+        setPower(0);
     }
 
     public void setD(double d){
         ArmSubsystem.d = d;
+        setPower(0);
     }
 
     public void stopArm(){
@@ -245,9 +249,12 @@ public class ArmSubsystem extends SubsystemBase {
 
 
 
-        telemetry.addData("power, ", power);
-        telemetry.addData("pos, ", armPos);
-        telemetry.addData("target ", target);
+        telemetry.addLine("ARM CONTROL");
+        telemetry.addData("power", power);
+        telemetry.addData("armPos ", armPos);
+        telemetry.addData("target (position) ", target);
+        telemetry.addData("test target (position) ", testTarget);
+        telemetry.addData("target angle ", target / ticks_in_degree);
         telemetry.addData("motor power ", arm.getPower());
         telemetry.addData("ff", ff);
 
