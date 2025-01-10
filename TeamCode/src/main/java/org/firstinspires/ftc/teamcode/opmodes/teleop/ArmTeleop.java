@@ -21,8 +21,8 @@ public class ArmTeleop extends OpMode {
 
     public double ticksPerRotation = 288;
     private PIDController pidController;
-    public static double p = .06, i = 0, d = 0.0001;
-    public static double f = 0.08;
+    public static double p = .0, i = 0, d = 0.0;
+    public static double f = 0.0;
 
 
     //downPos = 102;
@@ -51,6 +51,10 @@ public class ArmTeleop extends OpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         arm_motor = hardwareMap.get(DcMotorEx.class, "arm");
+        arm_motor.setDirection(DcMotorEx.Direction.REVERSE);
+        // arm_motor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        // arm_motor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+
 
 
 
