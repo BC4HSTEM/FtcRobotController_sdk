@@ -16,6 +16,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.CreateMechanismBase;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDDownCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDropCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDropPositionCommand;
@@ -61,8 +63,8 @@ public class CreateArmMechanism extends CreateMechanismBase {
     private ArmPUpCommand armPUpCommand;
     private ArmPDownCommand armPDownCommand;
     private ArmICommand armICommand;
-    private ArmDCommand armDUpCommand;
-    private ArmDCommand armDDownCommand;
+    private ArmDUpCommand armDUpCommand;
+    private ArmDDownCommand armDDownCommand;
 
     private DoubleSupplier leftDS;
     private DoubleSupplier rightDS;
@@ -219,12 +221,14 @@ public class CreateArmMechanism extends CreateMechanismBase {
     /*private ArmICommand createArmICommand(){
         return new ArmICommand(armSubsystem,op::getTrigger. , telemetry );
     }*/
-    private ArmDCommand createArmDUpCommand(){
-        return new ArmDCommand(armSubsystem,leftDS, telemetry );
+    private ArmDUpCommand createArmDUpCommand(){
+        return new ArmDUpCommand(armSubsystem, telemetry );
     }
 
-    private ArmDCommand createArmDDownCommand(){
-        return new ArmDCommand(armSubsystem,rightDS, telemetry );
+
+
+    private ArmDDownCommand createArmDDownCommand(){
+        return new ArmDDownCommand(armSubsystem, telemetry );
     }
 
 

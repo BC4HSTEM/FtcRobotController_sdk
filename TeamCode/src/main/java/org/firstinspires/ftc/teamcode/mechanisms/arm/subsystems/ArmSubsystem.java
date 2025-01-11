@@ -18,7 +18,7 @@ public class ArmSubsystem extends SubsystemBase {
 
     private PIDController controller;
 
-    public static double p = 0.00;
+    public static double p = 0.08269999999999955;
     public static double i = 0.0;
     public static double d = 0.00;
     public static double f = 0.059000000000000045;
@@ -244,16 +244,18 @@ public class ArmSubsystem extends SubsystemBase {
     public void setDUp(){
         d += dIncrement;
         telemetry.addData("d update", d);
+        telemetry.update();
 
-        setPower(currentTargetPos);
+        //setPower(currentTargetPos);
 
     }
 
     public void setDDown(){
         d -=  dIncrement;
         telemetry.addData("d downdate", d);
+        telemetry.update();
 
-        setPower(currentTargetPos);
+        //setPower(currentTargetPos);
     }
 
 
