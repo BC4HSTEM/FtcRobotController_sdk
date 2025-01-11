@@ -4,22 +4,14 @@ import com.arcrobotics.ftclib.command.CommandBase;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.subsystems.ArmSubsystem;
-import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.subsystems.DriveSubsystem;
 
-import java.util.function.DoubleSupplier;
-
-public class ArmFCommand extends CommandBase {
+public class ArmFDownCommand extends CommandBase {
     private ArmSubsystem armSubsystem;
-    private DoubleSupplier fUpValue;
-
-    private DoubleSupplier fYValue;
 
     Telemetry telemetry;
 
-    public ArmFCommand(ArmSubsystem armSubsystem, DoubleSupplier fY, Telemetry t){
+    public ArmFDownCommand(ArmSubsystem armSubsystem, Telemetry t){
         this.armSubsystem = armSubsystem;
-        fYValue = fY;
-
 
         this.telemetry = t;
 
@@ -28,9 +20,13 @@ public class ArmFCommand extends CommandBase {
     }
 
     @Override
-    public void execute(){
+    public void initialize(){
 
-        armSubsystem.setF(fYValue.getAsDouble());
+        armSubsystem.setFDown();
         //telemetry.addData("f", fYValue);
+    }
+
+    public boolean isFinished(){
+        return true;
     }
 }

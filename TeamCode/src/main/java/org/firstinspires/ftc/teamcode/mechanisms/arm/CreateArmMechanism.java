@@ -20,9 +20,13 @@ import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDropCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDropPositionCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmFCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmFDownCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmFUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmICommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmMidDropCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPDownCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpPositionCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelCommand;
@@ -51,13 +55,19 @@ public class CreateArmMechanism extends CreateMechanismBase {
     private ArmPickUpPositionCommand armPickUpPositionCommand;
 
     private ArmFCommand armFCommand;
+    private ArmFUpCommand armFUpCommand;
+    private ArmFDownCommand armFDownCommand;
     private ArmPCommand armPCommand;
+    private ArmPUpCommand armPUpCommand;
+    private ArmPDownCommand armPDownCommand;
     private ArmICommand armICommand;
     private ArmDCommand armDUpCommand;
     private ArmDCommand armDDownCommand;
 
     private DoubleSupplier leftDS;
     private DoubleSupplier rightDS;
+
+    private DoubleSupplier leftFS;
 
     private DcMotorEx arm;
 
@@ -87,46 +97,39 @@ public class CreateArmMechanism extends CreateMechanismBase {
         armSubsystem.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
 
+        armDownCommand = createArmDownCommand();
+        armUpCommand = createArmUpCommand();
+        armUpTargetCommand = createArmUpTargetCommand();
+        armTravelCommand = createArmTravelCommand();
 
-        //41. instead of creating the command right here, we created a function for it so we
-        //can reuse the code for Auto
-        //armDropCommand = createDropCommand();
-        //armMidDropCommand = createMidDropCommand();
-        //armPickUpCommand = createPickUpCommand();
+        armFUpCommand = createArmFUpCommand();
+        armFDownCommand = createArmFDownCommand();
 
-        //armDropPositionCommand = createDropPositionCommand();
-        //armPickUpPositionCommand = createPickUpPositionCommand();
-
-        //armDownCommand = createArmDownCommand();
-        //armUpCommand = createArmUpCommand();
-        //armUpTargetCommand = createArmUpTargetCommand();
-        //armTravelCommand = createArmTravelCommand();
-
-        leftDS = (() -> op.getTrigger(LEFT_TRIGGER));
-        rightDS = (() -> op.getTrigger(RIGHT_TRIGGER));
-
-        armFCommand = createArmFCommand();
-
-        armPCommand = createArmPCommand();
-
-        //armICommand = createArmICommand();
+        armPUpCommand = createArmPUpCommand();
+        armPDownCommand = createArmPDownCommand();
 
         armDUpCommand = createArmDUpCommand();
         armDDownCommand = createArmDDownCommand();
 
-        Trigger lTrigger = new Trigger(() -> op.getTrigger(LEFT_TRIGGER) > 0.5);
-        Trigger rTrigger = new Trigger(() -> op.getTrigger(RIGHT_TRIGGER) > 0.5);
+
 
 
         op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armUpCommand);
         op.getGamepadButton(GamepadKeys.Button.A).whenPressed(armDownCommand);
         op.getGamepadButton(GamepadKeys.Button.B).whenPressed(armTravelCommand);
-        op.getGamepadButton(GamepadKeys.Button.LEFT_STICK_BUTTON)
-                .whenActive(armFCommand);
-        op.getGamepadButton(GamepadKeys.Button.RIGHT_STICK_BUTTON)
-                .whenActive(armPCommand);
-        rTrigger.whenActive(armDUpCommand);
-        lTrigger.whenActive(armDDownCommand);
+
+        op.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenPressed(armFUpCommand);
+        op.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenPressed(armFDownCommand);
+
+        op.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenPressed(armPUpCommand);
+        op.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed(armPDownCommand);
+
+        op.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(armDUpCommand);
+        op.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenPressed(armDDownCommand);
+
+
+
+
 
     }
 
@@ -194,10 +197,24 @@ public class CreateArmMechanism extends CreateMechanismBase {
     private ArmFCommand createArmFCommand(){
         return new ArmFCommand(armSubsystem,op::getLeftY , telemetry );
     }
+    private ArmFUpCommand createArmFUpCommand(){
+        return new ArmFUpCommand(armSubsystem , telemetry );
+    }
+    private ArmFDownCommand createArmFDownCommand(){
+        return new ArmFDownCommand(armSubsystem , telemetry );
+    }
 
     private ArmPCommand createArmPCommand(){
         return new ArmPCommand(armSubsystem,op::getRightY , telemetry );
     }
+
+    private ArmPUpCommand createArmPUpCommand(){
+        return new ArmPUpCommand(armSubsystem , telemetry );
+    }
+    private ArmPDownCommand createArmPDownCommand(){
+        return new ArmPDownCommand(armSubsystem , telemetry );
+    }
+
 
     /*private ArmICommand createArmICommand(){
         return new ArmICommand(armSubsystem,op::getTrigger. , telemetry );
@@ -209,6 +226,8 @@ public class CreateArmMechanism extends CreateMechanismBase {
     private ArmDCommand createArmDDownCommand(){
         return new ArmDCommand(armSubsystem,rightDS, telemetry );
     }
+
+
 
 
 
