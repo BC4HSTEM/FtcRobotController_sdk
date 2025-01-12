@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -48,7 +49,7 @@ public class ArmTeleopRunToPositionAlternate extends OpMode {
 
             arm_motor = hardwareMap.get(DcMotorEx.class, "arm");
 
-            arm_motor.setDirection(DcMotor.Direction.FORWARD);
+            arm_motor.setDirection(DcMotor.Direction.REVERSE);
             arm_motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             arm_motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             arm_motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -105,22 +106,24 @@ public class ArmTeleopRunToPositionAlternate extends OpMode {
                 //preset buttons
                 if (gamepad1.x) {
                     arm_motor.setTargetPosition(armHomePosition);
-                    arm_motor.setPower(0.3);
                     arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    arm_motor.setPower(0.5);
+
                 }
                 else if (gamepad1.y) {
                     arm_motor.setTargetPosition(armUpPosition);
-                    arm_motor.setPower(0.3);
                     arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    arm_motor.setPower(0.5);
+
                 }
                 else if (gamepad1.b) {
                     arm_motor.setTargetPosition(armTravelPosition);
-                    arm_motor.setPower(0.3);
+                    arm_motor.setPower(0.5);
                     arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 }
                 else if (gamepad1.a) {
                     arm_motor.setTargetPosition(armDownPosition);
-                    arm_motor.setPower(0.3);
+                    arm_motor.setPower(0.5);
                     arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 }
             }
