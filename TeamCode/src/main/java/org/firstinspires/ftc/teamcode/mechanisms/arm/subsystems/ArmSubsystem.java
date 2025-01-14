@@ -31,11 +31,8 @@ public class ArmSubsystem extends SubsystemBase {
     public static int testTarget = 0;
 
     public static double motorDegrees = 360.0;
-    //public static double largeGear = 108;
 
-    //public static double smallGear = 30;
-
-    //public double gearRatio = largeGear / smallGear;
+    public static double ticksOffsetFromHorizontal = 104;
 
     public double ticksPerRotation = 288;
 
