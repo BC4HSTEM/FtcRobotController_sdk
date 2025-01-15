@@ -62,7 +62,6 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
         //31. assign the command to te appropriate button action https://docs.ftclib.org/ftclib/v/v2.0.0/command-base/command-system/binding-commands-to-triggers
         //How to Implement a Toggle with a Button Instead:
         op.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).toggleWhenPressed(grabberRightCloseCommand,grabberRightCommand);
-        //op.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenPressed(grabberRightCloseCommand);
 
         op.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).toggleWhenPressed(grabberLeftCloseCommand,grabberLeftCommand);
         //op.getGamepadButton(GamepadKeys.Button.A).whenPressed(grabberLeftCloseCommand);

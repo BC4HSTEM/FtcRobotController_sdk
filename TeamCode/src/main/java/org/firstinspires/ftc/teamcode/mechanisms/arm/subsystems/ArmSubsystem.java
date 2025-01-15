@@ -18,19 +18,21 @@ public class ArmSubsystem extends SubsystemBase {
 
     private PIDController controller;
 
-    public static double p = 0.06;
+    public static double p = 0.08269999999999955;
     public static double i = 0.0;
-    public static double d = 0.0001;
-    public static double f = .09;
+    public static double d = 0.00;
+    public static double f = 0.059000000000000045;
+
+    public static double pIncrement = 0.001;
+    public static double iIncrement = 0.001;
+    public static double dIncrement = 0.001;
+    public static double fIncrement = 0.001;
 
     public static int testTarget = 0;
 
     public static double motorDegrees = 360.0;
-    //public static double largeGear = 108;
 
-    //public static double smallGear = 30;
-
-    //public double gearRatio = largeGear / smallGear;
+    public static double ticksOffsetFromHorizontal = 104;
 
     public double ticksPerRotation = 288;
 
@@ -38,12 +40,15 @@ public class ArmSubsystem extends SubsystemBase {
 
     public static int dropMidPosition = 400;
 
+    public static int resetPosition = 0;
     public static int pickUpTargetPosition = 20;
 
-    public static int downTargetPosition = 113;
+    public static int downTargetPosition = 106;
     public static int upTargetPosition = 25;
 
     public static int travelTargetPosition = 65;
+
+    public static int currentTargetPos = 0;
 
     private final double ticks_in_degree = (/*gearRatio */ ticksPerRotation)  / motorDegrees;
 
@@ -77,33 +82,39 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     public void setDropTargetPIDPosition(){
-        controller.setPID(p,i,d);
+        //controller.setPID(p,i,d);
         setPower(dropTargetPosition);
     }
 
     public void setDownTargetPIDPosition(){
-        controller.setPID(p,i,d);
+        //controller.setPID(p,i,d);
         setPower(downTargetPosition);
     }
 
     public void setPickUpTargetPIDPosition(){
-        controller.setPID(p,i,d);
+        //controller.setPID(p,i,d);
         setPower(pickUpTargetPosition);
     }
 
     public void setUpTargetPIDPosition(){
-        controller.setPID(p,i,d);
+        //controller.setPID(p,i,d);
         setPower(upTargetPosition);
     }
 
     public void setMidDropTargetPIDPosition(){
-        controller.setPID(p,i,d);
+        //controller.setPID(p,i,d);
         setPower(dropMidPosition);
     }
 
     public void setTravelTargetPIDPosition(){
-        controller.setPID(p,i,d);
+        //controller.setPID(p,i,d);
         setPower(travelTargetPosition);
+    }
+
+    public void setResetTargetPIDPosition(){
+
+        setPower(0);
+        stopResetEncoder();
     }
 
     public void setTargetPosition(int t){
@@ -170,6 +181,89 @@ public class ArmSubsystem extends SubsystemBase {
         arm.setMode(mode);
     }
 
+    public void setF(double f){
+        ArmSubsystem.f = f;
+        //setPower(0);
+    }
+
+    public void setFUp(){
+        f += fIncrement;
+        telemetry.addData("f update", f);
+
+        setPower(currentTargetPos);
+
+    }
+
+    public void setFDown(){
+        f -=  fIncrement;
+        telemetry.addData("f downdate", f);
+
+        setPower(currentTargetPos);
+    }
+
+    public void setP(double p){
+        ArmSubsystem.p = p;
+        setPower(0);
+    }
+
+    public void setPUp(){
+        p += pIncrement;
+        telemetry.addData("p update", p);
+
+        setPower(currentTargetPos);
+
+    }
+
+    public void setPDown(){
+        p -=  pIncrement;
+        telemetry.addData("p downdate", p);
+
+        setPower(currentTargetPos);
+    }
+
+    public void setI(double i){
+        ArmSubsystem.i = i;
+        setPower(0);
+    }
+
+    public void setIUp(){
+        i += iIncrement;
+        telemetry.addData("i update", i);
+
+        setPower(currentTargetPos);
+
+    }
+
+    public void setIDown(){
+        i -=  iIncrement;
+        telemetry.addData("i downdate", i);
+
+        setPower(currentTargetPos);
+    }
+
+    public void setD(double d){
+        ArmSubsystem.d = d;
+        setPower(0);
+    }
+    public void setDUp(){
+        d += dIncrement;
+        telemetry.addData("d update", d);
+        telemetry.update();
+
+        //setPower(currentTargetPos);
+
+    }
+
+    public void setDDown(){
+        d -=  dIncrement;
+        telemetry.addData("d downdate", d);
+        telemetry.update();
+
+        //setPower(currentTargetPos);
+    }
+
+
+
     public void stopArm(){
         arm.setPower(0);
     }
@@ -178,6 +272,7 @@ public class ArmSubsystem extends SubsystemBase {
 
         return arm.getPower();
     }
+
 
     public boolean isAtDropTargetPosition(){
         return controller.atSetPoint();
@@ -210,12 +305,14 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     private void setPower(int target){
+        controller.setPID(p,i,d);
+        currentTargetPos = target;
         int armPos = arm.getCurrentPosition();
         double pid = controller.calculate(armPos, target);
-        double ff = Math.cos(Math.toRadians(target / ticks_in_degree)) * f;
+        double ff = Math.cos( Math.toRadians( (ticksOffsetFromHorizontal - armPos) * ticks_in_degree)) * (-f);
 
         double power = pid + ff;
-        
+
 
 
         arm.setPower(power);
@@ -223,11 +320,18 @@ public class ArmSubsystem extends SubsystemBase {
 
 
 
-        telemetry.addData("power, ", power);
-        telemetry.addData("pos, ", armPos);
-        telemetry.addData("target ", target);
+        telemetry.addLine("ARM CONTROL");
+        telemetry.addData("power", power);
+        telemetry.addData("armPos ", armPos);
+        telemetry.addData("target (position) ", target);
+        telemetry.addData("test target (position) ", testTarget);
+        telemetry.addData("target angle ", target / ticks_in_degree);
         telemetry.addData("motor power ", arm.getPower());
         telemetry.addData("ff", ff);
+        telemetry.addData("f", f);
+        telemetry.addData("p", p);
+        telemetry.addData("i", i);
+        telemetry.addData("d", d);
 
         telemetry.update();
 
