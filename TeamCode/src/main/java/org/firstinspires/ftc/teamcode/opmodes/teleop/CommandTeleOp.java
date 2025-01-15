@@ -28,7 +28,7 @@ public class CommandTeleOp extends CommandOpMode {
         CreateGrabberMechanism createGrabber = new CreateGrabberMechanism(hardwareMap, "grab", driver1, telemetry, true);
 
         CreateArmMechanism createArmMechanism = new CreateArmMechanism(hardwareMap, "arm", driver1, telemetry, true);
-        CreateGrabberMechanism createGrabberMechanism = new CreateGrabberMechanism(hardwareMap, "grabber", driver1, telemetry, true);
+        //CreateGrabberMechanism createGrabberMechanism = new CreateGrabberMechanism(hardwareMap, "grabber", driver1, telemetry, true);
         CreateGrabberWristMechanism createGrabberWristMechanism = new CreateGrabberWristMechanism(hardwareMap, "wrist_Motion", driver1, telemetry, true);
 
     }
