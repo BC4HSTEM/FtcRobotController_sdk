@@ -22,10 +22,10 @@ public class GrabberSubsystem extends SubsystemBase {
     public static double GRABBER_RIGHT_OPEN_ANGLE = 150;
     public static double GRABBER_LEFT_OPEN_ANGLE = 100;
 
-    public static double GRABBER_RIGHT_CLOSE_POSITION = 0.3;
-    public static double GRABBER_LEFT_CLOSE_POSITION = 0.4;
-    public static double GRABBER_RIGHT_OPEN_POSITION = 0.12;
-    public static double GRABBER_LEFT_OPEN_POSITION = 0.12;
+    public static double GRABBER_RIGHT_OPEN_POSITION = 0.3;
+    public static double GRABBER_LEFT_OPEN_POSITION = 0.4;
+    public static double GRABBER_RIGHT_CLOSE_POSITION = 0.12;
+    public static double GRABBER_LEFT_CLOSE_POSITION = 0.12;
 
     //4. Define you constructor .... we should probably have one with telemetry passed to it
     public GrabberSubsystem(ServoEx grabberRight, ServoEx grabberLeft){
@@ -82,6 +82,8 @@ public class GrabberSubsystem extends SubsystemBase {
         grabRightPosition(GRABBER_RIGHT_CLOSE_POSITION);
     }
     public void closeGrabberPosition(){
+        telemetry.addLine("inside closeGrabberPosition");
+        telemetry.update();
         grabRightPosition(GRABBER_RIGHT_CLOSE_POSITION);
         grabLeftPosition(GRABBER_LEFT_CLOSE_POSITION);
     }
@@ -94,6 +96,8 @@ public class GrabberSubsystem extends SubsystemBase {
         grabLeftPosition(GRABBER_LEFT_CLOSE_POSITION);
     }
     public void openGrabberPosition(){
+        telemetry.addLine("inside openGrabberPosition");
+        telemetry.update();
         grabLeftPosition(GRABBER_LEFT_OPEN_POSITION);
         grabRightPosition(GRABBER_RIGHT_OPEN_POSITION);
     }
@@ -134,6 +138,9 @@ public class GrabberSubsystem extends SubsystemBase {
         return GRABBER_LEFT_OPEN_ANGLE;
     }
 
+    public double getRightOpenPosition(){
+        return GRABBER_RIGHT_OPEN_POSITION;
+    }
     public double getLeftOpenPosition(){
         return GRABBER_LEFT_OPEN_POSITION;
     }
