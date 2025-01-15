@@ -301,7 +301,7 @@ public class ArmSubsystem extends SubsystemBase {
         currentTargetPos = target;
         int armPos = arm.getCurrentPosition();
         double pid = controller.calculate(armPos, target);
-        double ff = Math.cos(Math.toRadians(target / ticks_in_degree)) * f;
+        double ff = Math.cos( Math.toRadians( (ticksOffsetFromHorizontal - armPos) * ticks_in_degree)) * (-f);
 
         double power = pid + ff;
         

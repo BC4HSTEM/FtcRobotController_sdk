@@ -5,12 +5,12 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.subsystems.ArmSubsystem;
 
-public class ArmDDownCommand extends CommandBase {
+public class ArmIDownCommand extends CommandBase {
     private ArmSubsystem armSubsystem;
 
     Telemetry telemetry;
 
-    public ArmDDownCommand(ArmSubsystem armSubsystem, Telemetry t){
+    public ArmIDownCommand(ArmSubsystem armSubsystem, Telemetry t){
         this.armSubsystem = armSubsystem;
 
         this.telemetry = t;
@@ -22,7 +22,7 @@ public class ArmDDownCommand extends CommandBase {
     @Override
     public void initialize(){
 
-        armSubsystem.setDDown();
+        armSubsystem.setIDown();
         //telemetry.addData("f", fYValue);
     }
 

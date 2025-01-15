@@ -5,12 +5,12 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.subsystems.ArmSubsystem;
 
-public class ArmDUpCommand extends CommandBase {
+public class ArmIUpCommand extends CommandBase {
     private ArmSubsystem armSubsystem;
 
     Telemetry telemetry;
 
-    public ArmDUpCommand(ArmSubsystem armSubsystem, Telemetry t){
+    public ArmIUpCommand(ArmSubsystem armSubsystem, Telemetry t){
         this.armSubsystem = armSubsystem;
 
         this.telemetry = t;
@@ -22,7 +22,7 @@ public class ArmDUpCommand extends CommandBase {
     @Override
     public void initialize(){
 
-        armSubsystem.setDUp();
+        armSubsystem.setIUp();
 
     }
 
