@@ -46,41 +46,14 @@ public class GrabberSubsystem extends SubsystemBase {
         }
     }
     //5. define a grab function that sets the servo position....this function should probably be private
-    public void grabRight(double rAngle){
-        grabberRight.turnToAngle(rAngle);
-    }
-
-    public void grabLeft(double lAngle){
-        grabberLeft.turnToAngle(lAngle);
-    }
     public void grabRightPosition(double rPosition){
         grabberRight.setPosition(rPosition);
     }
-
     public void grabLeftPosition(double lPosition){
         grabberLeft.setPosition(lPosition);
     }
 
     //6. Define functions that the commands can call
-    public void openRightGrabber(){
-        grabRight(GRABBER_RIGHT_OPEN_ANGLE);
-    }
-    public void closeRightGrabber(){
-        grabRight(GRABBER_RIGHT_CLOSE_ANGLE);
-    }
-
-    public void openLeftGrabber(){
-        grabLeft(GRABBER_LEFT_OPEN_ANGLE);
-    }
-    public void closeLeftGrabber(){
-        grabLeft(GRABBER_LEFT_CLOSE_ANGLE);
-    }
-    public void openRightGrabberPosition(){
-        grabRightPosition(GRABBER_RIGHT_OPEN_POSITION);
-    }
-    public void closeRightGrabberPosition(){
-        grabRightPosition(GRABBER_RIGHT_CLOSE_POSITION);
-    }
     public void closeGrabberPosition(){
         telemetry.addLine("inside closeGrabberPosition");
         telemetry.update();
@@ -89,12 +62,6 @@ public class GrabberSubsystem extends SubsystemBase {
     }
 
 
-    public void openLeftGrabberPosition(){
-        grabLeftPosition(GRABBER_LEFT_OPEN_POSITION);
-    }
-    public void closeLeftGrabberPosition(){
-        grabLeftPosition(GRABBER_LEFT_CLOSE_POSITION);
-    }
     public void openGrabberPosition(){
         telemetry.addLine("inside openGrabberPosition");
         telemetry.update();
@@ -103,12 +70,6 @@ public class GrabberSubsystem extends SubsystemBase {
     }
 
     //7. Accessors for telemetry and isFinished in Commands
-    public double getGrabberRightAngle(){
-        return grabberRight.getAngle();
-    }
-    public double getGrabberLeftAngle(){
-        return grabberLeft.getAngle();
-    }
     public double getGrabberRightPosition(){
         return grabberRight.getPosition();
     }
@@ -117,25 +78,12 @@ public class GrabberSubsystem extends SubsystemBase {
     }
 
 
-    /*public double getRightCloseAngle){
-        return GRABBER_RIGHT_CLOSE_ANGLE;
-    }*/
-    /*public double getLeftCloseAngle){
-        return GRABBER_LEFT_CLOSE_ANGLE;
-    }*/
     public double getLeftClosePosition(){
         return GRABBER_LEFT_CLOSE_POSITION;
     }
 
     public double getRightClosePosition(){
         return GRABBER_RIGHT_CLOSE_POSITION;
-    }
-    public double getRightOpenAngle(){
-        return GRABBER_RIGHT_OPEN_ANGLE;
-    }
-
-    public double getLeftOpenAngle(){
-        return GRABBER_LEFT_OPEN_ANGLE;
     }
 
     public double getRightOpenPosition(){
