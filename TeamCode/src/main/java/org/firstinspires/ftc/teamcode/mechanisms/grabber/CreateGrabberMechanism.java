@@ -9,6 +9,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.mechanisms.CreateMechanismBase;
+import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberCloseCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberOpenCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.subsystems.GrabberSubsystem;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberLeftCloseCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberLeftCommand;
@@ -30,6 +32,10 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
 
     private GrabberLeftCommand grabberLeftCommand;
     private GrabberLeftCloseCommand grabberLeftCloseCommand;
+
+    private GrabberOpenCommand grabberOpenCommand;
+
+    private GrabberCloseCommand grabberCloseCommand;
 
     //22. Is this a 180 or 360 servo, define your max and min
     private int MIN_ANGLE = 0;
@@ -61,9 +67,9 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
         //30. determine which button you want to use
         //31. assign the command to te appropriate button action https://docs.ftclib.org/ftclib/v/v2.0.0/command-base/command-system/binding-commands-to-triggers
         //How to Implement a Toggle with a Button Instead:
-        op.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).toggleWhenPressed(grabberRightCloseCommand,grabberRightCommand);
+        op.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).toggleWhenPressed(grabberCloseCommand,grabberOpenCommand);
 
-        op.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).toggleWhenPressed(grabberLeftCloseCommand,grabberLeftCommand);
+        //op.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).toggleWhenPressed(grabberLeftCloseCommand,grabberLeftCommand);
         //op.getGamepadButton(GamepadKeys.Button.A).whenPressed(grabberLeftCloseCommand);
 
         //32. go to CommandTeleop
@@ -86,6 +92,9 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
 
         grabberLeftCommand = createGrabberLeftCommand();
         grabberLeftCloseCommand = createGrabberLeftCloseCommand();
+
+        grabberOpenCommand = createGrabberOpenCommand();
+        grabberCloseCommand = createGrabberCloseCommand();
 
     }
 
@@ -117,6 +126,13 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
         return new GrabberLeftCloseCommand(grabberSubsystem, telemetry);
     }
 
+    public GrabberOpenCommand createGrabberOpenCommand(){
+        return new GrabberOpenCommand(grabberSubsystem, telemetry);
+    }
+    public GrabberCloseCommand createGrabberCloseCommand(){
+        return new GrabberCloseCommand(grabberSubsystem, telemetry);
+    }
+
     public GrabberRightCloseCommand getGrabberRightCloseCommand(){
         return grabberRightCloseCommand;
     }
@@ -124,6 +140,8 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
     public GrabberLeftCloseCommand getGrabberLeftCloseCommand(){
         return grabberLeftCloseCommand;
     }
+
+
 
 
 }
