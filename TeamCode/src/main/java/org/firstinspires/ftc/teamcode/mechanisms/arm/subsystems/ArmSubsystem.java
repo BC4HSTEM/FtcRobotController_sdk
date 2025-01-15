@@ -43,7 +43,7 @@ public class ArmSubsystem extends SubsystemBase {
     public static int resetPosition = 0;
     public static int pickUpTargetPosition = 20;
 
-    public static int downTargetPosition = 106;
+    public static int downTargetPosition = 107;
     public static int upTargetPosition = 25;
 
     public static int travelTargetPosition = 65;
