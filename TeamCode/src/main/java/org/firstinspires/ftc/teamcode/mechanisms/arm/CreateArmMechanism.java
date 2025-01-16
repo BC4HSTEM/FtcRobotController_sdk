@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.CreateMechanismBase;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownIncrementCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDropCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDropPositionCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmMidDropCommand;
@@ -20,6 +21,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpPositionC
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmResetCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpDecrementCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpTargetCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.subsystems.ArmSubsystem;
 
@@ -37,6 +39,9 @@ public class CreateArmMechanism extends CreateMechanismBase {
     private ArmTravelCommand armTravelCommand;
 
     private ArmResetCommand armResetCommand;
+
+    private ArmDownIncrementCommand armDownIncrementCommand;
+    private ArmUpDecrementCommand armUpDecrementCommand;
 
     private ArmMidDropCommand armMidDropCommand;
 
@@ -87,12 +92,18 @@ public class CreateArmMechanism extends CreateMechanismBase {
         armTravelCommand = createArmTravelCommand();
         armResetCommand = createArmResetCommand();
 
+        armDownIncrementCommand = createArmDownIncrementCommand();
+        armUpDecrementCommand = createArmUpDecrementCommand();
+
 
         op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armUpCommand);
         op.getGamepadButton(GamepadKeys.Button.A).whenPressed(armDownCommand);
         op.getGamepadButton(GamepadKeys.Button.B).whenPressed(armTravelCommand);
         op.getGamepadButton(GamepadKeys.Button.START).whenPressed(armResetCommand);
-        //armSubsystem.setDefaultCommand(armPickUpCommand);
+        op.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenPressed(armDownIncrementCommand);
+        op.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed(armUpDecrementCommand);
+
+
 
     }
 
@@ -164,6 +175,14 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
     private ArmResetCommand createArmResetCommand(){
         return new ArmResetCommand(armSubsystem, telemetry);
+    }
+
+    private ArmDownIncrementCommand createArmDownIncrementCommand(){
+        return new ArmDownIncrementCommand(armSubsystem, telemetry);
+    }
+
+    private ArmUpDecrementCommand createArmUpDecrementCommand(){
+        return new ArmUpDecrementCommand(armSubsystem, telemetry);
     }
 
 

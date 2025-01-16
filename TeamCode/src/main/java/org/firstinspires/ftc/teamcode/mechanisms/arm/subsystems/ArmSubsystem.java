@@ -50,6 +50,12 @@ public class ArmSubsystem extends SubsystemBase {
 
     public static int currentTargetPos = 0;
 
+    public static int armDownIncrement = 1;
+
+    public static int armUpDecrement = 1;
+
+
+
     private final double ticks_in_degree = (/*gearRatio */ ticksPerRotation)  / motorDegrees;
 
     private DcMotorEx arm;
@@ -116,6 +122,20 @@ public class ArmSubsystem extends SubsystemBase {
         setPower(resetPosition);
         stopResetEncoder();
         setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+
+    public void setArmDownIncrement(){
+        int downIncrement = currentTargetPos + armDownIncrement;
+
+        setPower(downIncrement);
+
+    }
+
+    public void setArmUpDecrement(){
+        int upDecrement = currentTargetPos + armUpDecrement;
+
+        setPower(upDecrement);
+
     }
 
     public void setTargetPosition(int t){
