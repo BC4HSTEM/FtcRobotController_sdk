@@ -113,8 +113,9 @@ public class ArmSubsystem extends SubsystemBase {
 
     public void setResetTargetPIDPosition(){
 
-        setPower(0);
+        setPower(resetPosition);
         stopResetEncoder();
+        setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void setTargetPosition(int t){
