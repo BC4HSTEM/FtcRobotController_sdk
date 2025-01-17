@@ -35,15 +35,17 @@ public class GrabberOpenCommand extends CommandBase{
         //telemetry.addData("grabber open position", grabberSubsystem.getOpenPosition());
         telemetry.update();
         grabberSubsystem.openGrabberPosition();
+
+        telemetry.addData("grabber right position", grabberSubsystem.getGrabberRightPosition());
+        telemetry.addData("grabber left position", grabberSubsystem.getGrabberLeftPosition());
+        telemetry.addData("grabber right open position", grabberSubsystem.getRightOpenPosition());
+        telemetry.addData("grabber left open position", grabberSubsystem.getLeftOpenPosition());
+        telemetry.update();
     }
 
-    @Override
+    /*@Override
     public void execute(){
-        telemetry.addData("grabber open position", grabberSubsystem.getGrabberRightPosition());
-        telemetry.addData("grabber open position", grabberSubsystem.getGrabberLeftPosition());
-        telemetry.addData("grabber close position", grabberSubsystem.getRightClosePosition());
-        telemetry.addData("grabber close position", grabberSubsystem.getLeftClosePosition());
-        telemetry.update();
+
     }
 
     //15. isFinished may only be needed to assist with autonomous

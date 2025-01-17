@@ -31,9 +31,15 @@ public class GrabberCloseCommand extends CommandBase{
         //telemetry.addData("grabber close position", grabberSubsystem.getClosePosition());
         telemetry.update();
         grabberSubsystem.closeGrabberPosition();
+
+        telemetry.addData("grabber right position", grabberSubsystem.getGrabberRightPosition());
+        telemetry.addData("grabber left position", grabberSubsystem.getGrabberLeftPosition());
+        telemetry.addData("grabber right close position", grabberSubsystem.getRightClosePosition());
+        telemetry.addData("grabber left close position", grabberSubsystem.getLeftClosePosition());
+        telemetry.update();
     }
 
-    @Override
+   /* @Override
     public void execute(){
         telemetry.addData("grabber right position", grabberSubsystem.getGrabberRightPosition());
         telemetry.addData("grabber right close position", grabberSubsystem.getRightClosePosition());
