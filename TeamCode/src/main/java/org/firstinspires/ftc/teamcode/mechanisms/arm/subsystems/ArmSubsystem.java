@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.globals.ArmAdjust;
 
 @Config
 public class ArmSubsystem extends SubsystemBase {
@@ -54,6 +55,8 @@ public class ArmSubsystem extends SubsystemBase {
 
     public static int armUpDecrement = 1;
 
+    //public static int armAdjust = 0;
+
 
 
     private final double ticks_in_degree = (/*gearRatio */ ticksPerRotation)  / motorDegrees;
@@ -88,36 +91,75 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     public void setDropTargetPIDPosition(){
-        //controller.setPID(p,i,d);
+        if(ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_DOWN){
+            dropTargetPosition += 1;
+        }
+        else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_UP){
+            dropTargetPosition -= 1;
+        }
         setPower(dropTargetPosition);
+        ArmAdjust.getInstance().setAdjustArm(ArmAdjust.AdjustArm.ADJUST_NONE);
     }
 
     public void setDownTargetPIDPosition(){
-        //controller.setPID(p,i,d);
+        if(ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_DOWN){
+            downTargetPosition += 1;
+        }
+        else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_UP){
+            downTargetPosition -= 1;
+        }
         setPower(downTargetPosition);
+        ArmAdjust.getInstance().setAdjustArm(ArmAdjust.AdjustArm.ADJUST_NONE);
     }
 
     public void setPickUpTargetPIDPosition(){
-        //controller.setPID(p,i,d);
+        if(ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_DOWN){
+            pickUpTargetPosition += 1;
+        }
+        else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_UP){
+            pickUpTargetPosition -= 1;
+        }
         setPower(pickUpTargetPosition);
+        ArmAdjust.getInstance().setAdjustArm(ArmAdjust.AdjustArm.ADJUST_NONE);
     }
 
     public void setUpTargetPIDPosition(){
-        //controller.setPID(p,i,d);
+        if(ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_DOWN){
+            upTargetPosition += 1;
+        }
+        else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_UP){
+            upTargetPosition -= 1;
+        }
         setPower(upTargetPosition);
+        ArmAdjust.getInstance().setAdjustArm(ArmAdjust.AdjustArm.ADJUST_NONE);
     }
 
     public void setMidDropTargetPIDPosition(){
-        //controller.setPID(p,i,d);
+        if(ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_DOWN){
+            dropMidPosition += 1;
+        }
+        else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_UP){
+            travelTargetPosition -= 1;
+        }
         setPower(dropMidPosition);
+        ArmAdjust.getInstance().setAdjustArm(ArmAdjust.AdjustArm.ADJUST_NONE);
     }
 
     public void setTravelTargetPIDPosition(){
-        //controller.setPID(p,i,d);
+
+        if(ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_DOWN){
+            travelTargetPosition += 1;
+        }
+        else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_UP){
+            travelTargetPosition -= 1;
+        }
         setPower(travelTargetPosition);
+
+        ArmAdjust.getInstance().setAdjustArm(ArmAdjust.AdjustArm.ADJUST_NONE);
     }
 
     public void setResetTargetPIDPosition(){
+
 
         setPower(resetPosition);
         stopResetEncoder();
@@ -132,11 +174,17 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     public void setArmUpDecrement(){
-        int upDecrement = currentTargetPos + armUpDecrement;
+        int upDecrement = currentTargetPos - armUpDecrement;
 
         setPower(upDecrement);
 
     }
+
+    /*public void setArmAdjust(int adjust){
+        armAdjust = adjust;
+        telemetry.addData("armAdjust", armAdjust);
+        telemetry.update();
+    }*/
 
     public void setTargetPosition(int t){
         int armPos = arm.getCurrentPosition();
@@ -326,11 +374,15 @@ public class ArmSubsystem extends SubsystemBase {
     }
 
     private void setPower(int target){
+
+
         controller.setPID(p,i,d);
         currentTargetPos = target;
         int armPos = arm.getCurrentPosition();
         double pid = controller.calculate(armPos, target);
         double ff = Math.cos( Math.toRadians( (ticksOffsetFromHorizontal - armPos) * ticks_in_degree)) * (-f);
+
+
 
         double power = pid + ff;
 
@@ -346,6 +398,7 @@ public class ArmSubsystem extends SubsystemBase {
         telemetry.addData("armPos ", armPos);
         telemetry.addData("target (position) ", target);
         telemetry.addData("test target (position) ", testTarget);
+        telemetry.addData("current target (position) ", currentTargetPos);
         telemetry.addData("target angle ", target / ticks_in_degree);
         telemetry.addData("motor power ", arm.getPower());
         telemetry.addData("ff", ff);
@@ -354,7 +407,11 @@ public class ArmSubsystem extends SubsystemBase {
         telemetry.addData("i", i);
         telemetry.addData("d", d);
 
+        telemetry.addData("ArmAdjustGlobal" , ArmAdjust.getInstance().getAdjustArm());
+
         telemetry.update();
+
+
 
 
     }

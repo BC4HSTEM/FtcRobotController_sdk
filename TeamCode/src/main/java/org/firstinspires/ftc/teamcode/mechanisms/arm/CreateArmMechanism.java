@@ -10,7 +10,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.globals.ArmAdjust;
 import org.firstinspires.ftc.teamcode.mechanisms.CreateMechanismBase;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownAdjustCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownIncrementCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDropCommand;
@@ -20,14 +22,17 @@ import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpPositionCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmResetCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpAdjustCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpDecrementCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpTargetCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.subsystems.ArmAdjustSubsystem;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.subsystems.ArmSubsystem;
 
 public class CreateArmMechanism extends CreateMechanismBase {
 
     private ArmSubsystem armSubsystem;
+    private ArmAdjustSubsystem armAdjustSubsystem;
     private ArmDropCommand armDropCommand;
     private ArmPickUpCommand armPickUpCommand;
 
@@ -41,6 +46,8 @@ public class CreateArmMechanism extends CreateMechanismBase {
     private ArmResetCommand armResetCommand;
 
     private ArmDownIncrementCommand armDownIncrementCommand;
+    private ArmDownAdjustCommand armDownAdjustCommand;
+    private ArmUpAdjustCommand armUpAdjustCommand;
     private ArmUpDecrementCommand armUpDecrementCommand;
 
     private ArmMidDropCommand armMidDropCommand;
@@ -95,13 +102,17 @@ public class CreateArmMechanism extends CreateMechanismBase {
         armDownIncrementCommand = createArmDownIncrementCommand();
         armUpDecrementCommand = createArmUpDecrementCommand();
 
+        armDownAdjustCommand = createArmDownAdjustCommand();
+        armUpAdjustCommand = createArmUpAdjustCommand();
+
 
         op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armUpCommand);
         op.getGamepadButton(GamepadKeys.Button.A).whenPressed(armDownCommand);
         op.getGamepadButton(GamepadKeys.Button.B).whenPressed(armTravelCommand);
         op.getGamepadButton(GamepadKeys.Button.START).whenPressed(armResetCommand);
-        op.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenPressed(armDownIncrementCommand);
-        op.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed(armUpDecrementCommand);
+
+        op.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenPressed(armDownAdjustCommand);
+        op.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed(armUpAdjustCommand);
 
 
 
@@ -128,6 +139,8 @@ public class CreateArmMechanism extends CreateMechanismBase {
         armSubsystem.stopResetEncoder();
         //38. set the direction of the motor, ideally this is tested while not on the lift
         armSubsystem.setDirection(DcMotorEx.Direction.REVERSE);
+
+        armAdjustSubsystem = new ArmAdjustSubsystem(telemetry, true);
 
 
         //op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armPickUpCommand);
@@ -183,6 +196,14 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
     private ArmUpDecrementCommand createArmUpDecrementCommand(){
         return new ArmUpDecrementCommand(armSubsystem, telemetry);
+    }
+
+    private ArmDownAdjustCommand createArmDownAdjustCommand(){
+        return new ArmDownAdjustCommand(armAdjustSubsystem, telemetry);
+    }
+
+    private ArmUpAdjustCommand createArmUpAdjustCommand(){
+        return new ArmUpAdjustCommand(armAdjustSubsystem, telemetry);
     }
 
 
