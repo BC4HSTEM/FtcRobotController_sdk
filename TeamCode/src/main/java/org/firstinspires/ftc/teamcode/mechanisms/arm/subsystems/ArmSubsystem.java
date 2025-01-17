@@ -45,9 +45,16 @@ public class ArmSubsystem extends SubsystemBase {
     public static int pickUpTargetPosition = 20;
 
     public static int downTargetPosition = 107;
+
+
+    private final int resetDownTargetPosition = 107;
     public static int upTargetPosition = 25;
 
+    private final int resetUpTargetPosition = 25;
+
     public static int travelTargetPosition = 65;
+
+    private final int resetTravelTargetPosition = 65;
 
     public static int currentTargetPos = 0;
 
@@ -108,6 +115,9 @@ public class ArmSubsystem extends SubsystemBase {
         else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_UP){
             downTargetPosition -= 1;
         }
+        else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_RESET) {
+            downTargetPosition = resetDownTargetPosition;
+        }
         setPower(downTargetPosition);
         ArmAdjust.getInstance().setAdjustArm(ArmAdjust.AdjustArm.ADJUST_NONE);
     }
@@ -118,6 +128,9 @@ public class ArmSubsystem extends SubsystemBase {
         }
         else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_UP){
             pickUpTargetPosition -= 1;
+        }
+        else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_RESET) {
+            pickUpTargetPosition = resetUpTargetPosition;
         }
         setPower(pickUpTargetPosition);
         ArmAdjust.getInstance().setAdjustArm(ArmAdjust.AdjustArm.ADJUST_NONE);
@@ -137,6 +150,9 @@ public class ArmSubsystem extends SubsystemBase {
     public void setMidDropTargetPIDPosition(){
         if(ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_DOWN){
             dropMidPosition += 1;
+        }
+        else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_RESET) {
+            dropMidPosition = resetTravelTargetPosition;
         }
         else if (ArmAdjust.getInstance().getAdjustArm() == ArmAdjust.AdjustArm.ADJUST_UP){
             travelTargetPosition -= 1;

@@ -7,23 +7,22 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.globals.ArmAdjust;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.subsystems.ArmAdjustSubsystem;
-import org.firstinspires.ftc.teamcode.mechanisms.arm.subsystems.ArmSubsystem;
 
 
-public class ArmDownAdjustCommand extends CommandBase {
+public class ArmResetAdjustCommand extends CommandBase {
 
     private ArmAdjustSubsystem armAdjustSubsystem;
     private Telemetry telemetry;
 
 
 
-    public ArmDownAdjustCommand(ArmAdjustSubsystem armAdjustSubsystem){
+    public ArmResetAdjustCommand(ArmAdjustSubsystem armAdjustSubsystem){
         this.armAdjustSubsystem = armAdjustSubsystem;
 
         addRequirements(armAdjustSubsystem);
     }
 
-    public ArmDownAdjustCommand(ArmAdjustSubsystem armAdjustSubsystem, Telemetry telemetry){
+    public ArmResetAdjustCommand(ArmAdjustSubsystem armAdjustSubsystem, Telemetry telemetry){
         this.armAdjustSubsystem = armAdjustSubsystem;
         this.telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
@@ -35,7 +34,7 @@ public class ArmDownAdjustCommand extends CommandBase {
 
     @Override
     public void initialize(){
-        ArmAdjust.getInstance().setAdjustArm(ArmAdjust.AdjustArm.ADJUST_DOWN);
+        ArmAdjust.getInstance().setAdjustArm(ArmAdjust.AdjustArm.ADJUST_RESET);
 
 
     }

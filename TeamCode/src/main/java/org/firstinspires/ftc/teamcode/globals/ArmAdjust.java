@@ -6,7 +6,8 @@ public enum ArmAdjust {
     public enum AdjustArm {
         ADJUST_NONE,
         ADJUST_DOWN,
-        ADJUST_UP
+        ADJUST_UP,
+        ADJUST_RESET
     }
 
 

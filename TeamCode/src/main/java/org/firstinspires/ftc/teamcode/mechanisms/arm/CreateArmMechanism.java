@@ -20,6 +20,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDropPositionCom
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmMidDropCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpPositionCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmResetAdjustCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmResetCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpAdjustCommand;
@@ -48,6 +49,8 @@ public class CreateArmMechanism extends CreateMechanismBase {
     private ArmDownIncrementCommand armDownIncrementCommand;
     private ArmDownAdjustCommand armDownAdjustCommand;
     private ArmUpAdjustCommand armUpAdjustCommand;
+
+    private ArmResetAdjustCommand armResetAdjustCommand;
     private ArmUpDecrementCommand armUpDecrementCommand;
 
     private ArmMidDropCommand armMidDropCommand;
@@ -104,6 +107,7 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
         armDownAdjustCommand = createArmDownAdjustCommand();
         armUpAdjustCommand = createArmUpAdjustCommand();
+        armResetAdjustCommand = createArmResetAdjustCommand();
 
 
         op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armUpCommand);
@@ -113,6 +117,7 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
         op.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenPressed(armDownAdjustCommand);
         op.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenPressed(armUpAdjustCommand);
+        op.getGamepadButton(GamepadKeys.Button.BACK).whenPressed(armResetAdjustCommand);
 
 
 
@@ -204,6 +209,10 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
     private ArmUpAdjustCommand createArmUpAdjustCommand(){
         return new ArmUpAdjustCommand(armAdjustSubsystem, telemetry);
+    }
+
+    private ArmResetAdjustCommand createArmResetAdjustCommand(){
+        return new ArmResetAdjustCommand(armAdjustSubsystem, telemetry);
     }
 
 
