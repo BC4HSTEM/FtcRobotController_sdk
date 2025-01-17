@@ -10,6 +10,8 @@ public class DriveCommand extends CommandBase {
     private DriveSubsystem driveSubsystem;
     private DoubleSupplier strafe, forward, turn;
 
+    private double damper = 0.50;
+
     public DriveCommand(DriveSubsystem driveSubsystem, DoubleSupplier strafe, DoubleSupplier forward, DoubleSupplier turn){
         this.driveSubsystem = driveSubsystem;
         this.strafe = strafe;
@@ -20,6 +22,6 @@ public class DriveCommand extends CommandBase {
     }
     @Override
     public void execute(){
-        driveSubsystem.drive(strafe.getAsDouble(), forward.getAsDouble(), turn.getAsDouble());
+        driveSubsystem.drive(strafe.getAsDouble() * damper, forward.getAsDouble() * damper, turn.getAsDouble() * damper);
     }
 }
