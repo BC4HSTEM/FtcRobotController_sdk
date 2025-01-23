@@ -15,13 +15,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.globals.Alliance;
 
 import org.firstinspires.ftc.teamcode.globals.Path;
-import org.firstinspires.ftc.teamcode.globals.Positions;
 import org.firstinspires.ftc.teamcode.globals.Side;
 
 
+import org.firstinspires.ftc.teamcode.opmodes.autonomous.paths.BlueAllianceBasketSidePath2;
+import org.firstinspires.ftc.teamcode.opmodes.autonomous.paths.BlueAllianceBasketSidePath1;
 
-
-import org.firstinspires.ftc.teamcode.opmodes.autonomous.paths.TestPath1;
 
 
 @Autonomous(name="Auto Gamepad", group="InToTheDeep")
@@ -192,7 +191,7 @@ public class AutonomousGamePad extends CommandOpMode {
         if (Path.getInstance().getSelectedPathToFollow() == Path.PositionToFollow.PATH_1) {
             Path.getInstance().setSelectedPathToFollow(Path.PositionToFollow.PATH_1);
             if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE && Side.getInstance().getPositionSide() == Side.PositionSide.BASKETS_SIDE) {
-                TestPath1 bsPath1 = new TestPath1(hardwareMap, selectedStartPos, telemetry);
+                BlueAllianceBasketSidePath1 bsPath1 = new BlueAllianceBasketSidePath1(hardwareMap, selectedStartPos, telemetry);
                 bsPath1.createPath();
                 bsPath1.execute(this);
 
@@ -205,9 +204,9 @@ public class AutonomousGamePad extends CommandOpMode {
             }
             else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE && Side.getInstance().getPositionSide() == Side.PositionSide.OBSERVATION_ZONE_SIDE)
             {
-                /*BlueAllianceNonStageSidePath1 bnsPath1 = new BlueAllianceNonStageSidePath1(hardwareMap, createPositionIdentifierMechanism,selectedStartPos, telemetry);
-                bnsPath1.createPath();
-                bnsPath1.execute(this);*/
+                /*BlueAllianceBasketSideToBasketPath1 bbsbPath1 = new BlueAllianceBasketSideToBasketPath1(hardwareMap, selectedStartPos, telemetry);
+                bbsbPath1.createPath();
+                bbsbPath1.execute(this);*/
             }
             else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.OBSERVATION_ZONE_SIDE){
                 /*RedAllianceNonStageSidePath1 rnsPath1 = new RedAllianceNonStageSidePath1 (hardwareMap, selectedStartPos, telemetry);
@@ -222,6 +221,10 @@ public class AutonomousGamePad extends CommandOpMode {
                 //BlueAllianceStageSidePath2 bsPath2 = new BlueAllianceStageSidePath2(hardwareMap, selectedStartPos, telemetry);
                 //bsPath2.createPath();
                 //bsPath2.execute(this);
+
+                BlueAllianceBasketSidePath2 bbsbPath2 = new BlueAllianceBasketSidePath2(hardwareMap, selectedStartPos, telemetry);
+                bbsbPath2.createPath();
+                bbsbPath2.execute(this);
 
             } else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.BASKETS_SIDE){
 

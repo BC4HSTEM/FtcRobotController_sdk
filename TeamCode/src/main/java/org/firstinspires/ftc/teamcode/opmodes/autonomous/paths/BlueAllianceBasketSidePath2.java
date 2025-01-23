@@ -1,14 +1,8 @@
 package org.firstinspires.ftc.teamcode.opmodes.autonomous.paths;
 
-import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 import com.acmerobotics.roadrunner.Vector2d;
-import com.acmerobotics.roadrunner.ftc.Actions;
 import com.arcrobotics.ftclib.command.CommandOpMode;
-import com.arcrobotics.ftclib.command.InstantCommand;
-import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitUntilCommand;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
@@ -19,7 +13,8 @@ import org.firstinspires.ftc.teamcode.mechanisms.arm.CreateArmMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.commands.LineToXActionCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.commands.SequentialActionCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.commands.LineToYActionCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.commands.StrafeActionCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.CreateGrabberMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberCloseCommand;
@@ -28,7 +23,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.CreateGrabberWris
 import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristUpCommand;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-public class TestPath1 {
+public class BlueAllianceBasketSidePath2 {
 
     private HardwareMap hwMap;
     private Pose2d startPose;
@@ -40,7 +35,7 @@ public class TestPath1 {
     private DriveSubsystem driveSubsystem;
 
     private MecanumDrive drive;
-    public TestPath1(HardwareMap hwMap, Pose2d sp, Telemetry telemetry){
+    public BlueAllianceBasketSidePath2(HardwareMap hwMap, Pose2d sp, Telemetry telemetry){
         this.hwMap = hwMap;
         startPose = sp;
         this.telemetry = telemetry;
@@ -61,7 +56,8 @@ public class TestPath1 {
         telemetry.addLine("in execute....");
 
 
-        LineToXActionCommand lineToXActionCommand = new LineToXActionCommand(driveSubsystem, startPose, -9.0, telemetry);
+        //StrafeActionCommand strafeActionCommand = new StrafeActionCommand(driveSubsystem, startPose, new Vector2d(-38, -68), telemetry);
+        LineToYActionCommand lineToYActionCommand = new LineToYActionCommand(driveSubsystem, startPose, -60.0, telemetry);
 
         CreateGrabberMechanism createGrabber = new CreateGrabberMechanism(hwMap, "grab", telemetry);
         createGrabber.createBase();
@@ -86,6 +82,6 @@ public class TestPath1 {
 
 
         commandOpMode.schedule(new WaitUntilCommand(commandOpMode::isStarted).andThen(
-                new SequentialCommandGroup(lineToXActionCommand,grabberCloseCommand,grabberWristUpCommand, armTravelCommand,grabberOpenCommand,armDownCommand)));
+                new SequentialCommandGroup(lineToYActionCommand)));
     }
 }
