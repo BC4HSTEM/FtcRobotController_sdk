@@ -61,11 +61,6 @@ public class TestPath1 {
         telemetry.addLine("in execute....");
 
 
-        TrajectoryActionBuilder tab1 = drive.actionBuilder(startPose)
-                .lineToX(-9);
-        Action action1  = tab1.build();
-        //SequentialActionCommand seqActionCommand1 = new SequentialActionCommand(action1);
-
         LineToXActionCommand lineToXActionCommand = new LineToXActionCommand(driveSubsystem, startPose, -9.0, telemetry);
 
         CreateGrabberMechanism createGrabber = new CreateGrabberMechanism(hwMap, "grab", telemetry);
@@ -91,6 +86,6 @@ public class TestPath1 {
 
 
         commandOpMode.schedule(new WaitUntilCommand(commandOpMode::isStarted).andThen(
-                new SequentialCommandGroup(lineToXActionCommand,grabberOpenCommand,grabberWristUpCommand, armTravelCommand,grabberCloseCommand),armDownCommand));
+                new SequentialCommandGroup(lineToXActionCommand,grabberCloseCommand,grabberWristUpCommand, armTravelCommand,grabberOpenCommand),armDownCommand));
     }
 }

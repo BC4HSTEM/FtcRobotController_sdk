@@ -22,10 +22,10 @@ public class GrabberSubsystem extends SubsystemBase {
     public static double GRABBER_RIGHT_OPEN_ANGLE = 150;
     public static double GRABBER_LEFT_OPEN_ANGLE = 100;
 
-    public static double GRABBER_RIGHT_OPEN_POSITION = 0.3;
-    public static double GRABBER_LEFT_OPEN_POSITION = 0.4;
-    public static double GRABBER_RIGHT_CLOSE_POSITION = 0.115;
-    public static double GRABBER_LEFT_CLOSE_POSITION = 0.115;
+    public static double GRABBER_RIGHT_CLOSE_POSITION = 0.33;
+    public static double GRABBER_LEFT_CLOSE_POSITION = 0.4;
+    public static double GRABBER_RIGHT_OPEN_POSITION = 0.115;
+    public static double GRABBER_LEFT_OPEN_POSITION = 0.115;
 
     //4. Define you constructor .... we should probably have one with telemetry passed to it
     public GrabberSubsystem(ServoEx grabberRight, ServoEx grabberLeft){
