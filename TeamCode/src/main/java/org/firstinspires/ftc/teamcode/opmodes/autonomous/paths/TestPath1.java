@@ -86,6 +86,6 @@ public class TestPath1 {
 
 
         commandOpMode.schedule(new WaitUntilCommand(commandOpMode::isStarted).andThen(
-                new SequentialCommandGroup(lineToXActionCommand,grabberCloseCommand,grabberWristUpCommand, armTravelCommand,grabberOpenCommand),armDownCommand));
+                new SequentialCommandGroup(lineToXActionCommand,grabberCloseCommand,grabberWristUpCommand, armTravelCommand,grabberOpenCommand,armDownCommand)));
     }
 }
