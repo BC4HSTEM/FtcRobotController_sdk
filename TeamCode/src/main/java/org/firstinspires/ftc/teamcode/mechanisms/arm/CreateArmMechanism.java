@@ -83,7 +83,7 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
         //40. set motor to run without encoders
 
-        armSubsystem.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+
 
 
 
@@ -148,6 +148,8 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
         armAdjustSubsystem = new ArmAdjustSubsystem(telemetry, true);
 
+        armSubsystem.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+
 
         //op.getGamepadButton(GamepadKeys.Button.Y).whenPressed(armPickUpCommand);
 
@@ -170,7 +172,7 @@ public class CreateArmMechanism extends CreateMechanismBase {
         return new ArmMidDropCommand(armSubsystem, telemetry);
     }
 
-    private ArmDownCommand createArmDownCommand(){
+    public ArmDownCommand createArmDownCommand(){
         return new ArmDownCommand(armSubsystem, telemetry);
     }
 
@@ -182,7 +184,7 @@ public class CreateArmMechanism extends CreateMechanismBase {
         return new ArmUpTargetCommand(armSubsystem, telemetry);
     }
 
-    private ArmTravelCommand createArmTravelCommand(){
+    public ArmTravelCommand createArmTravelCommand(){
         return new ArmTravelCommand(armSubsystem, telemetry);
     }
 

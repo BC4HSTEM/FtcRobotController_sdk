@@ -80,4 +80,8 @@ public class CreateGrabberWristMechanism extends CreateMechanismBase {
 
         return new GrabberWristUpCommand(grabberWristSubsystem, telemetry);
     }
+
+    public GrabberWristUpCommand getGrabberWristUpCommand() {
+        return grabberWristUpCommand;
+    }
 }

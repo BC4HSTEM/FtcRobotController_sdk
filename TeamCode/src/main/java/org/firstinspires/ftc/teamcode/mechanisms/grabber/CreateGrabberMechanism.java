@@ -82,5 +82,13 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
         return new GrabberCloseCommand(grabberSubsystem, telemetry);
     }
 
+    public GrabberCloseCommand getGrabberCloseCommand(){
+        return grabberCloseCommand;
+    }
+
+    public GrabberOpenCommand getGrabberOpenCommand(){
+        return grabberOpenCommand;
+    }
+
 
 }

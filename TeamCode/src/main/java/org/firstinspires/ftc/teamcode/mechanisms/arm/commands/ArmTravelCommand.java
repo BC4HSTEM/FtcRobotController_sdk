@@ -36,10 +36,10 @@ public class ArmTravelCommand extends CommandBase {
 
     }
 
-    /*public boolean isFinished(){
+    public boolean isFinished(){
 
-        //return armSubsystem.isAtTravelTargetPosition();
-    }*/
+        return armSubsystem.isAtTravelTargetPosition();
+    }
 
     @Override
     public void end(boolean interrupt){

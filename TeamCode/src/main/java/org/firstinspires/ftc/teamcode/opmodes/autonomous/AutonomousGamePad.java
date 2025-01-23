@@ -24,7 +24,7 @@ import org.firstinspires.ftc.teamcode.globals.Side;
 import org.firstinspires.ftc.teamcode.opmodes.autonomous.paths.TestPath1;
 
 
-@Autonomous(name="Auto Gamepad", group="Stage")
+@Autonomous(name="Auto Gamepad", group="InToTheDeep")
 public class AutonomousGamePad extends CommandOpMode {
     //final String[] selectedAlliance = new String[1];
 
@@ -32,7 +32,9 @@ public class AutonomousGamePad extends CommandOpMode {
     //final String[] selectedPath = new String[1];
 
 
-    final Pose2d path1tartPose = new Pose2d(-36, 60, Math.toRadians(270));
+    final Pose2d path1StartPose = new Pose2d(-38, -55, Math.toRadians(0));
+
+    final Pose2d path2StartPose = new Pose2d(25, -55, Math.toRadians(0));
 
 
     private Pose2d selectedStartPos = new Pose2d(0,0,Math.toRadians(270));
@@ -165,16 +167,16 @@ public class AutonomousGamePad extends CommandOpMode {
 
         if (Side.getInstance().getPositionSide() == Side.PositionSide.BASKETS_SIDE){
             if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE) {
-                selectedStartPos = path1tartPose;
+                selectedStartPos = path1StartPose;
             } else if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED) {
-                selectedStartPos = path1tartPose;
+                selectedStartPos = path1StartPose;
             }
         }
         else if(Side.getInstance().getPositionSide() == Side.PositionSide.OBSERVATION_ZONE_SIDE){
             if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE) {
-                selectedStartPos = path1tartPose;
+                selectedStartPos = path2StartPose;
             } else if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED) {
-                selectedStartPos = path1tartPose;
+                selectedStartPos = path2StartPose;
             }
         }
 

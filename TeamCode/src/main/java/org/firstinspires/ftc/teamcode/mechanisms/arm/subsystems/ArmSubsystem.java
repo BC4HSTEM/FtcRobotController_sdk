@@ -95,6 +95,7 @@ public class ArmSubsystem extends SubsystemBase {
     private void createController(){
 
         controller = new PIDController(p,i,d);
+        controller.setTolerance(5,10);
     }
 
     public void setDropTargetPIDPosition(){
