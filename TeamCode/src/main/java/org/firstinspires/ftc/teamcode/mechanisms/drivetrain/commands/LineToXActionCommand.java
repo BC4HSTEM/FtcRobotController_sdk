@@ -28,7 +28,7 @@ public class LineToXActionCommand extends CommandBase {
     public LineToXActionCommand(DriveSubsystem driveSubsystem, Pose2d initPos, Double xPos, Telemetry t){
 
         this.driveSubsystem = driveSubsystem;
-        
+
         initialPos = initPos;
 
         xPosition = xPos;

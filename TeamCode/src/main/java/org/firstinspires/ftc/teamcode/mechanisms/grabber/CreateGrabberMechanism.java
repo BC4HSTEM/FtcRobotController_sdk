@@ -65,7 +65,7 @@ public class CreateGrabberMechanism extends CreateMechanismBase {
         grabberLeft = new SimpleServo(hwMap, "grabber_left", MIN_ANGLE, MAX_ANGLE);
 
         grabberLeft.setInverted(true);
-        //28. create the subsystem
+
         grabberSubsystem = new GrabberSubsystem(grabberRight, grabberLeft, telemetry, true);
 
         //29. Create the commands, used functions so that autonomous would have less work to do when

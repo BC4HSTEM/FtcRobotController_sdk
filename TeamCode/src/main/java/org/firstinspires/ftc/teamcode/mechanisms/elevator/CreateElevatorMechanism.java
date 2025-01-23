@@ -90,8 +90,8 @@ public class CreateElevatorMechanism extends CreateMechanismBase {
         //Make sure the device name from the OpMode matches what's in the hardware map
         //the GoBilda part of this may not be needed based on the attached motor
         //FtcLib has special features for GoBuilda motors
-        ER = new MotorEx(hwMap, rDeviceName, Motor.GoBILDA.RPM_30);
-        EL = new MotorEx(hwMap, lDeviceName, Motor.GoBILDA.RPM_30);
+        ER = new MotorEx(hwMap, rDeviceName, Motor.GoBILDA.RPM_223);
+        EL = new MotorEx(hwMap, lDeviceName, Motor.GoBILDA.RPM_223);
         telemetry.addData("Ri", ER);
         telemetry.addData("Li", EL);
         telemetry.update();
