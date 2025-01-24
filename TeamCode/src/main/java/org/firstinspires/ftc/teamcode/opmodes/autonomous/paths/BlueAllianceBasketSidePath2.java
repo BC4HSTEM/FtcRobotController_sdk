@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.autonomous.paths;
 
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.Vector2d;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitUntilCommand;
@@ -10,11 +9,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.CreateArmMechanism;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownAutoCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.commands.LineToXActionCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelAutoCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.commands.LineToYActionCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.commands.StrafeActionCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.CreateGrabberMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberCloseCommand;
@@ -72,8 +70,8 @@ public class BlueAllianceBasketSidePath2 {
         GrabberCloseCommand grabberCloseCommand = createGrabber.getGrabberCloseCommand();
         GrabberOpenCommand grabberOpenCommand = createGrabber.getGrabberOpenCommand();
 
-        ArmDownCommand armDownCommand = createArmMechanism.createArmDownCommand();
-        ArmTravelCommand armTravelCommand = createArmMechanism.createArmTravelCommand();
+        ArmDownAutoCommand armDownAutoCommand = createArmMechanism.createArmDownAutoCommand();
+        ArmTravelAutoCommand armTravelAutoCommand = createArmMechanism.createArmTravelAutoCommand();
 
         GrabberWristUpCommand grabberWristUpCommand = createGrabberWristMechanism.createGrabberWristUpCommand();
 

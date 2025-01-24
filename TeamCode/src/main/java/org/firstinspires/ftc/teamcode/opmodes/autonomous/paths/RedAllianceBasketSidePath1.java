@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.CreateGrabberWris
 import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristUpCommand;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-public class BlueAllianceBasketSidePath1 {
+public class RedAllianceBasketSidePath1 {
 
     private HardwareMap hwMap;
     private Pose2d startPose;
@@ -34,7 +34,7 @@ public class BlueAllianceBasketSidePath1 {
     private DriveSubsystem driveSubsystem;
 
     private MecanumDrive drive;
-    public BlueAllianceBasketSidePath1(HardwareMap hwMap, Pose2d sp, Telemetry telemetry){
+    public RedAllianceBasketSidePath1(HardwareMap hwMap, Pose2d sp, Telemetry telemetry){
         this.hwMap = hwMap;
         startPose = sp;
         this.telemetry = telemetry;
@@ -82,6 +82,6 @@ public class BlueAllianceBasketSidePath1 {
 
 
         commandOpMode.schedule(new WaitUntilCommand(commandOpMode::isStarted).andThen(
-                new SequentialCommandGroup(waitActionCommand,lineToXActionCommand,grabberCloseCommand,grabberWristUpCommand,grabberOpenCommand)));
+                new SequentialCommandGroup(waitActionCommand, lineToXActionCommand,grabberCloseCommand,grabberWristUpCommand,grabberOpenCommand)));
     }
 }

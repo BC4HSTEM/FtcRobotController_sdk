@@ -2,17 +2,13 @@ package org.firstinspires.ftc.teamcode.mechanisms.arm;
 
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
-import com.arcrobotics.ftclib.hardware.motors.MotorEx;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.globals.ArmAdjust;
 import org.firstinspires.ftc.teamcode.mechanisms.CreateMechanismBase;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownAdjustCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownAutoCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownIncrementCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDropCommand;
@@ -22,8 +18,10 @@ import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmPickUpPositionCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmResetAdjustCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmResetCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelAutoCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpAdjustCommand;
+import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpAutoCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpDecrementCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmUpTargetCommand;
@@ -43,6 +41,12 @@ public class CreateArmMechanism extends CreateMechanismBase {
     private ArmUpTargetCommand armUpTargetCommand;
 
     private ArmTravelCommand armTravelCommand;
+
+    private ArmDownAutoCommand armDownAutoCommand;
+    private ArmUpAutoCommand armUpAutoCommand;
+
+
+    private ArmTravelAutoCommand armTravelAutoCommand;
 
     private ArmResetCommand armResetCommand;
 
@@ -186,6 +190,18 @@ public class CreateArmMechanism extends CreateMechanismBase {
 
     public ArmTravelCommand createArmTravelCommand(){
         return new ArmTravelCommand(armSubsystem, telemetry);
+    }
+
+    public ArmDownAutoCommand createArmDownAutoCommand(){
+        return new ArmDownAutoCommand(armSubsystem, telemetry);
+    }
+
+    private ArmUpAutoCommand createArmUpAutoCommand(){
+        return new ArmUpAutoCommand(armSubsystem, telemetry);
+    }
+
+    public ArmTravelAutoCommand createArmTravelAutoCommand(){
+        return new ArmTravelAutoCommand(armSubsystem, telemetry);
     }
 
 

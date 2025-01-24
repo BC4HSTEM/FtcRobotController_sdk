@@ -13,7 +13,6 @@ import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownAutoCommand
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelAutoCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.commands.LineToXActionCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.commands.WaitActionCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.subsystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.CreateGrabberMechanism;
 import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberCloseCommand;
@@ -22,7 +21,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.CreateGrabberWris
 import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristUpCommand;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-public class BlueAllianceBasketSidePath1 {
+public class RedAllianceObservationSidePath1 {
 
     private HardwareMap hwMap;
     private Pose2d startPose;
@@ -34,7 +33,7 @@ public class BlueAllianceBasketSidePath1 {
     private DriveSubsystem driveSubsystem;
 
     private MecanumDrive drive;
-    public BlueAllianceBasketSidePath1(HardwareMap hwMap, Pose2d sp, Telemetry telemetry){
+    public RedAllianceObservationSidePath1(HardwareMap hwMap, Pose2d sp, Telemetry telemetry){
         this.hwMap = hwMap;
         startPose = sp;
         this.telemetry = telemetry;
@@ -75,13 +74,11 @@ public class BlueAllianceBasketSidePath1 {
 
         GrabberWristUpCommand grabberWristUpCommand = createGrabberWristMechanism.createGrabberWristUpCommand();
 
-        WaitActionCommand waitActionCommand = new WaitActionCommand(20);
-
 
         telemetry.update();
 
 
         commandOpMode.schedule(new WaitUntilCommand(commandOpMode::isStarted).andThen(
-                new SequentialCommandGroup(waitActionCommand,lineToXActionCommand,grabberCloseCommand,grabberWristUpCommand,grabberOpenCommand)));
+                new SequentialCommandGroup(lineToXActionCommand,grabberCloseCommand,grabberWristUpCommand,grabberOpenCommand)));
     }
 }

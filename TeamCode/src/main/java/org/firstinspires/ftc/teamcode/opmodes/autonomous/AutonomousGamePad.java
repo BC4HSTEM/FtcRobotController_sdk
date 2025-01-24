@@ -20,7 +20,9 @@ import org.firstinspires.ftc.teamcode.globals.Side;
 
 import org.firstinspires.ftc.teamcode.opmodes.autonomous.paths.BlueAllianceBasketSidePath2;
 import org.firstinspires.ftc.teamcode.opmodes.autonomous.paths.BlueAllianceBasketSidePath1;
-
+import org.firstinspires.ftc.teamcode.opmodes.autonomous.paths.BlueAllianceObservationSidePath1;
+import org.firstinspires.ftc.teamcode.opmodes.autonomous.paths.RedAllianceBasketSidePath1;
+import org.firstinspires.ftc.teamcode.opmodes.autonomous.paths.RedAllianceObservationSidePath1;
 
 
 @Autonomous(name="Auto Gamepad", group="InToTheDeep")
@@ -31,9 +33,12 @@ public class AutonomousGamePad extends CommandOpMode {
     //final String[] selectedPath = new String[1];
 
 
-    final Pose2d path1StartPose = new Pose2d(-38, -55, Math.toRadians(0));
+    final Pose2d path1BaseketStartPose = new Pose2d(-38, -55, Math.toRadians(0));
+    final Pose2d path1ObservationStartPose = new Pose2d(5, -55, Math.toRadians(0));
 
-    final Pose2d path2StartPose = new Pose2d(25, -55, Math.toRadians(0));
+    final Pose2d path2BasketStartPose = new Pose2d(-38, -55, Math.toRadians(0));
+
+    final Pose2d path2ObservationStartPose = new Pose2d(5, -55, Math.toRadians(0));
 
 
     private Pose2d selectedStartPos = new Pose2d(0,0,Math.toRadians(270));
@@ -166,16 +171,16 @@ public class AutonomousGamePad extends CommandOpMode {
 
         if (Side.getInstance().getPositionSide() == Side.PositionSide.BASKETS_SIDE){
             if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE) {
-                selectedStartPos = path1StartPose;
+                selectedStartPos = path1BaseketStartPose;
             } else if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED) {
-                selectedStartPos = path1StartPose;
+                selectedStartPos = path1BaseketStartPose;
             }
         }
         else if(Side.getInstance().getPositionSide() == Side.PositionSide.OBSERVATION_ZONE_SIDE){
             if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE) {
-                selectedStartPos = path2StartPose;
+                selectedStartPos = path1ObservationStartPose;
             } else if (Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED) {
-                selectedStartPos = path2StartPose;
+                selectedStartPos = path1ObservationStartPose;
             }
         }
 
@@ -197,21 +202,20 @@ public class AutonomousGamePad extends CommandOpMode {
 
             } else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.BASKETS_SIDE){
 
-
-                /*RedAllianceStageSidePath1 rsPath1 = new RedAllianceStageSidePath1(hardwareMap, createPositionIdentifierMechanism,selectedStartPos, telemetry);
+                RedAllianceBasketSidePath1 rsPath1 = new RedAllianceBasketSidePath1(hardwareMap, selectedStartPos, telemetry);
                 rsPath1.createPath();
-                rsPath1.execute(this);*/
+                rsPath1.execute(this);
             }
             else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.BLUE && Side.getInstance().getPositionSide() == Side.PositionSide.OBSERVATION_ZONE_SIDE)
             {
-                /*BlueAllianceBasketSideToBasketPath1 bbsbPath1 = new BlueAllianceBasketSideToBasketPath1(hardwareMap, selectedStartPos, telemetry);
-                bbsbPath1.createPath();
-                bbsbPath1.execute(this);*/
+                BlueAllianceObservationSidePath1 bsosPath1 = new BlueAllianceObservationSidePath1(hardwareMap, selectedStartPos, telemetry);
+                bsosPath1.createPath();
+                bsosPath1.execute(this);
             }
             else if(Alliance.getInstance().getAllianceTeam() == Alliance.AllianceTeam.RED && Side.getInstance().getPositionSide() == Side.PositionSide.OBSERVATION_ZONE_SIDE){
-                /*RedAllianceNonStageSidePath1 rnsPath1 = new RedAllianceNonStageSidePath1 (hardwareMap, selectedStartPos, telemetry);
-                rnsPath1.createPath();
-                rnsPath1.execute(this);*/
+                RedAllianceObservationSidePath1 rsosPath1 = new RedAllianceObservationSidePath1(hardwareMap, selectedStartPos, telemetry);
+                rsosPath1.createPath();
+                rsosPath1.execute(this);
             }
         }
 
