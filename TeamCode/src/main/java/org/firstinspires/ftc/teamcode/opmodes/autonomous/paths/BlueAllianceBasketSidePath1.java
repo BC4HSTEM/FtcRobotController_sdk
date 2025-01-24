@@ -55,7 +55,7 @@ public class BlueAllianceBasketSidePath1 {
         telemetry.addLine("in execute....");
 
 
-        LineToXActionCommand lineToXActionCommand = new LineToXActionCommand(driveSubsystem, startPose, 25.0, telemetry);
+        LineToXActionCommand lineToXActionCommand = new LineToXActionCommand(driveSubsystem, startPose, 23.0, telemetry);
 
         CreateGrabberMechanism createGrabber = new CreateGrabberMechanism(hwMap, "grab", telemetry);
         createGrabber.createBase();
