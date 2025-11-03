@@ -1,43 +1,40 @@
-package org.firstinspires.ftc.teamcode.mechanisms.grabber.subsystems;
+package org.firstinspires.ftc.teamcode.mechanisms.launch_pad.subsystems;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.hardware.ServoEx;
+import com.arcrobotics.ftclib.hardware.motors.CRServo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 //1. Extend Subsystem base class
 @Config
-public class GrabberSubsystem extends SubsystemBase {
-    //2. setup a SeveroEx variable
-    private ServoEx grabberRight;
-    private ServoEx grabberLeft;
+public class LaunchPadSubsystem extends SubsystemBase {
 
     private Telemetry telemetry;
-    //3. Define the open and close position of the grabber
-    public static double GRABBER_RIGHT_CLOSE_ANGLE = 100;
-    public static double GRABBER_LEFT_CLOSE_ANGLE = 150;
-    public static double GRABBER_RIGHT_OPEN_ANGLE = 150;
-    public static double GRABBER_LEFT_OPEN_ANGLE = 100;
 
-    public static double GRABBER_RIGHT_CLOSE_POSITION = 0.33;
-    public static double GRABBER_LEFT_CLOSE_POSITION = 0.4;
-    public static double GRABBER_RIGHT_OPEN_POSITION = 0.115;
-    public static double GRABBER_LEFT_OPEN_POSITION = 0.115;
+    //2. setup a CRServo variable
+    private CRServo feederRight;
+    private CRServo feederLeft;
 
-    //4. Define you constructor .... we should probably have one with telemetry passed to it
-    public GrabberSubsystem(ServoEx grabberRight, ServoEx grabberLeft){
+    //3. Define the length of time to run in milliseconds
+    public static int launchPadRuntime = 2000;
+    private ElapsedTime servoTimer;
+    private boolean servosRunning = false;
 
-        this.grabberRight = grabberRight;
-        this.grabberLeft = grabberLeft;
+    //4. Define you constructor
+    public LaunchPadSubsystem(CRServo feederLeft, CRServo feederRight){
+        this.feederRight = feederRight;
+        this.feederLeft = feederLeft;
     }
 
-    public GrabberSubsystem(ServoEx grabberRight, ServoEx grabberLeft, Telemetry telemetry, boolean useDB){
+    public LaunchPadSubsystem(CRServo feederLeft, CRServo feederRight, Telemetry telemetry, boolean useDB){
 
-        this.grabberRight = grabberRight;
-        this.grabberLeft = grabberLeft;
+        this.feederRight = feederRight;
+        this.feederLeft = feederLeft;
         if (useDB){
             this.telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         }
@@ -45,53 +42,37 @@ public class GrabberSubsystem extends SubsystemBase {
             this.telemetry = telemetry;
         }
     }
-    //5. define a grab function that sets the servo position....this function should probably be private
-    public void grabRightPosition(double rPosition){
-        grabberRight.setPosition(rPosition);
-    }
-    public void grabLeftPosition(double lPosition){
-        grabberLeft.setPosition(lPosition);
-    }
+    //5. tell the launchpad to push a ball into the launcher
+    public void activateFeeder(){
 
-    //6. Define functions that the commands can call
-    public void closeGrabberPosition(){
-        telemetry.addLine("inside closeGrabberPosition");
+        if (!servosRunning) {
+            // Start servos at full power
+            feederRight.set(1.0);
+            feederRight.set(1.0);
+            servoTimer.reset();
+            servosRunning = true;
+        }
+
+        // Stop the servo after timer
+        if (servosRunning && servoTimer.milliseconds() >= launchPadRuntime) {
+            feederRight.set(0);
+            feederRight.set(0);
+            servosRunning = false;
+        }
+
+        // Telemetry for debugging
+        telemetry.addData("Servos Running", servosRunning);
+        telemetry.addData("Timer (ms)", servoTimer.milliseconds());
+        telemetry.addData("Right CRServo Power", feederRight.get());
+        telemetry.addData("Left CRServo Power", feederRight.get());
         telemetry.update();
-        grabRightPosition(GRABBER_RIGHT_CLOSE_POSITION);
-        grabLeftPosition(GRABBER_LEFT_CLOSE_POSITION);
-    }
-
-
-    public void openGrabberPosition(){
-        telemetry.addLine("inside openGrabberPosition");
-        telemetry.update();
-        grabLeftPosition(GRABBER_LEFT_OPEN_POSITION);
-        grabRightPosition(GRABBER_RIGHT_OPEN_POSITION);
     }
 
     //7. Accessors for telemetry and isFinished in Commands
-    public double getGrabberRightPosition(){
-        return grabberRight.getPosition();
+    public double getFeederLeftSpeed(){
+        return feederLeft.get();
     }
-    public double getGrabberLeftPosition(){
-        return grabberLeft.getPosition();
+    public double getFeederRightSpeed(){
+        return feederRight.get();
     }
-
-
-    public double getLeftClosePosition(){
-        return GRABBER_LEFT_CLOSE_POSITION;
-    }
-
-    public double getRightClosePosition(){
-        return GRABBER_RIGHT_CLOSE_POSITION;
-    }
-
-    public double getRightOpenPosition(){
-        return GRABBER_RIGHT_OPEN_POSITION;
-    }
-    public double getLeftOpenPosition(){
-        return GRABBER_LEFT_OPEN_POSITION;
-    }
-
-    //8. go to GrabberCommand
 }

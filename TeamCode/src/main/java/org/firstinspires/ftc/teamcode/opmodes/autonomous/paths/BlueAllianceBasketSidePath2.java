@@ -8,17 +8,8 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.mechanisms.arm.CreateArmMechanism;
-import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownAutoCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmDownCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.arm.commands.ArmTravelAutoCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.commands.LineToYActionCommand;
 import org.firstinspires.ftc.teamcode.mechanisms.drivetrain.subsystems.DriveSubsystem;
-import org.firstinspires.ftc.teamcode.mechanisms.grabber.CreateGrabberMechanism;
-import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberCloseCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.grabber.commands.GrabberOpenCommand;
-import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.CreateGrabberWristMechanism;
-import org.firstinspires.ftc.teamcode.mechanisms.grabber_wrist.commands.GrabberWristUpCommand;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 public class BlueAllianceBasketSidePath2 {
@@ -53,31 +44,10 @@ public class BlueAllianceBasketSidePath2 {
 
         telemetry.addLine("in execute....");
 
-
         //StrafeActionCommand strafeActionCommand = new StrafeActionCommand(driveSubsystem, startPose, new Vector2d(-38, -68), telemetry);
         LineToYActionCommand lineToYActionCommand = new LineToYActionCommand(driveSubsystem, startPose, -60.0, telemetry);
 
-        CreateGrabberMechanism createGrabber = new CreateGrabberMechanism(hwMap, "grab", telemetry);
-        createGrabber.createBase();
-
-        CreateArmMechanism createArmMechanism = new CreateArmMechanism(hwMap, "arm", telemetry);
-        createArmMechanism.createBase();
-
-        CreateGrabberWristMechanism createGrabberWristMechanism = new CreateGrabberWristMechanism(hwMap, "wrist_Motion", telemetry);
-        createGrabberWristMechanism.createBase();
-
-
-        GrabberCloseCommand grabberCloseCommand = createGrabber.getGrabberCloseCommand();
-        GrabberOpenCommand grabberOpenCommand = createGrabber.getGrabberOpenCommand();
-
-        ArmDownAutoCommand armDownAutoCommand = createArmMechanism.createArmDownAutoCommand();
-        ArmTravelAutoCommand armTravelAutoCommand = createArmMechanism.createArmTravelAutoCommand();
-
-        GrabberWristUpCommand grabberWristUpCommand = createGrabberWristMechanism.createGrabberWristUpCommand();
-
-
         telemetry.update();
-
 
         commandOpMode.schedule(new WaitUntilCommand(commandOpMode::isStarted).andThen(
                 new SequentialCommandGroup(lineToYActionCommand)));

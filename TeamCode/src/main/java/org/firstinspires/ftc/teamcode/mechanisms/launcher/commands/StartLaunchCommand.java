@@ -7,33 +7,34 @@ import org.firstinspires.ftc.teamcode.mechanisms.launcher.subsystems.LauncherSub
 
 import java.util.function.DoubleSupplier;
 
-public class StopLaunchCommand extends CommandBase {
+public class StartLaunchCommand extends CommandBase {
 
     private LauncherSubsystem launcherSubsystem;
     private DoubleSupplier power;
     private Telemetry telemetry;
 
-    public StopLaunchCommand(LauncherSubsystem launcherSubsystem){
+    public StartLaunchCommand(LauncherSubsystem launcherSubsystem, DoubleSupplier power){
         this.launcherSubsystem = launcherSubsystem;
-        //this.power = power;
+        this.power = power;
 
         addRequirements(launcherSubsystem);
     }
 
-    public StopLaunchCommand(LauncherSubsystem launcherSubsystem, Telemetry telemetry){
+    public StartLaunchCommand(LauncherSubsystem launcherSubsystem, DoubleSupplier power, Telemetry telemetry){
         this.launcherSubsystem = launcherSubsystem;
-        //this.power = power;
+        this.power = power;
         this.telemetry = telemetry;
 
         addRequirements(launcherSubsystem);
     }
 
     @Override
-    public void initialize(){
+    public void execute(){
 
-        telemetry.addLine("Launch Stop Executing");
+        telemetry.addLine("Launcher Executing");
         telemetry.update();
-        launcherSubsystem.setPower(0);
+
+        launcherSubsystem.turn(-power.getAsDouble());
 
         telemetry.addData("Motor Power", launcherSubsystem.getPower());
         telemetry.update();
