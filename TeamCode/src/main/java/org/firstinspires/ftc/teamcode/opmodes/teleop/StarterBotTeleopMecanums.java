@@ -34,6 +34,7 @@ package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -58,12 +59,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * we will also need to adjust the "PIDF" coefficients with some that are a better fit for our application.
  */
 
+@Config
 @TeleOp(name = "GoBilda Decode Starter Bot", group = "StarterBot")
 //@Disabled
 public class StarterBotTeleopMecanums extends OpMode {
-    final double FEED_TIME_SECONDS = 0.20; //The feeder servos run this long when a shot is requested.
-    final double STOP_SPEED = 0.0; //We send this power to the servos when we want them to stop.
-    final double FULL_SPEED = 1.0;
+    public static double FEED_TIME_SECONDS = 0.20; //The feeder servos run this long when a shot is requested.
+    public static double STOP_SPEED = 0.0; //We send this power to the servos when we want them to stop.
+    public static double FULL_SPEED = 1.0;
 
     /*
      * When we control our launcher motor, we are using encoders. These allow the control system
@@ -71,8 +73,8 @@ public class StarterBotTeleopMecanums extends OpMode {
      * velocity. Here we are setting the target, and minimum velocity that the launcher should run
      * at. The minimum velocity is a threshold for determining when to fire.
      */
-    final double LAUNCHER_TARGET_VELOCITY = 1125;
-    final double LAUNCHER_MIN_VELOCITY = 1075;
+    public static double LAUNCHER_TARGET_VELOCITY = 1625;
+    public static double LAUNCHER_MIN_VELOCITY = 1275;
 
     // Declare OpMode members.
     private DcMotor leftFrontDrive = null;
@@ -290,11 +292,11 @@ public class StarterBotTeleopMecanums extends OpMode {
                 break;
             case LAUNCHING:
                 if (feederTimer.seconds() > FEED_TIME_SECONDS) {
-                    launchState = LaunchState.IDLE;
-                    leftFeeder.setPower(STOP_SPEED);
-                    rightFeeder.setPower(STOP_SPEED);
-                }
-                break;
+        launchState = LaunchState.IDLE;
+        leftFeeder.setPower(STOP_SPEED);
+        rightFeeder.setPower(STOP_SPEED);
         }
-    }
-}
+        break;
+        }
+        }
+        }
