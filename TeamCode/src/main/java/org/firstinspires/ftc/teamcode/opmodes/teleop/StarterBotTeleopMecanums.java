@@ -34,7 +34,9 @@ package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -124,7 +126,7 @@ public class StarterBotTeleopMecanums extends OpMode {
     @Override
     public void init() {
         launchState = LaunchState.IDLE;
-
+         telemetry = new MultipleTelemetry(telemetry,FtcDashboard.getInstance().getTelemetry());
         /*
          * Initialize the hardware variables. Note that the strings used here as parameters
          * to 'get' must correspond to the names assigned during the robot configuration
@@ -289,6 +291,11 @@ public class StarterBotTeleopMecanums extends OpMode {
                 rightFeeder.setPower(FULL_SPEED);
                 feederTimer.reset();
                 launchState = LaunchState.LAUNCHING;
+                telemetry.addData("launch speed",launcher.getVelocity());
+                telemetry.addData("launch speed target",LAUNCHER_TARGET_VELOCITY);
+                telemetry.addData("launcher speed min",LAUNCHER_MIN_VELOCITY);
+
+                telemetry.update();
                 break;
             case LAUNCHING:
                 if (feederTimer.seconds() > FEED_TIME_SECONDS) {
